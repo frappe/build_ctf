@@ -1,0 +1,19 @@
+meta {
+  name: Register
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{base_url}}/api/method/ctf.api.auth.register
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "test1@gmail.com",
+    "first_name": "Test1",
+    "last_name": "User"
+  }
+}

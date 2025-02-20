@@ -1,0 +1,18 @@
+meta {
+  name: Verify Code (Email)
+  type: http
+  seq: 4
+}
+
+post {
+  url: {{base_url}}/api/method/ctf.api.auth.verify_code
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "code": "636387",
+    "email": "test1@gmail.com"
+  }
+}

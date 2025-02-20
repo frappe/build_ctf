@@ -1,0 +1,17 @@
+meta {
+  name: Login
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{base_url}}/api/method/ctf.api.auth.login
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "email": "test1@gmail.com"
+  }
+}

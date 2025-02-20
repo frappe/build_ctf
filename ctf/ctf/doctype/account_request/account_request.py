@@ -16,10 +16,11 @@ class AccountRequest(Document):
 	if TYPE_CHECKING:
 		from frappe.types import DF
 
+		completed: DF.Check
 		email: DF.Data
 		first_name: DF.Data
 		last_name: DF.Data
-		verification_code: DF.Data
+		verification_code: DF.Data | None
 	# end: auto-generated types
 
 	def validate(self):
@@ -38,11 +39,20 @@ class AccountRequest(Document):
 			self.verification_code = "999999"
 		else:
 			self.verification_code = generate_otp()
-			self.save()
-			send_verification_mail(self.email, self.verification_code)
+
+		self.save()
+		send_verification_mail(self.email, self.verification_code)
 
 	def verify_code_and_login(self, code: str):
-		if self.verification_code and self.verification_code == code:
+		if self.completed or frappe.db.exists("User", self.email):
+			frappe.throw("You already completed sign up. Please login.")
+
+		if not self.verification_code or self.verification_code != code:
+			frappe.throw("Invalid verification code")
+
+		session_user = frappe.session.user
+		try:
+			frappe.set_user("Administrator")
 			# create the user
 			user = frappe.get_doc(
 				{
@@ -52,16 +62,22 @@ class AccountRequest(Document):
 					"last_name": self.last_name,
 					"send_welcome_email": 0,
 				}
-			).insert(ignore_permissions=True)
+			).insert()
 			# create ctf candidate
 			frappe.get_doc(
 				{
 					"doctype": "CTF Candidate",
 					"user": user.name,
 				}
-			).insert(ignore_permissions=True)
+			).insert()
+			# mark ar as completed
+			self.completed = 1
+			self.save()
 			# login the user
 			frappe.local.login_manager.login_as(user.name)
+		except Exception:
+			frappe.set_user(session_user)
+			raise
 
 	@staticmethod
 	def register(email: str, first_name: str, last_name: str) -> "AccountRequest":

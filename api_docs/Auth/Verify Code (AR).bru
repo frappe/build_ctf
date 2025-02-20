@@ -1,0 +1,18 @@
+meta {
+  name: Verify Code (AR)
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{base_url}}/api/method/ctf.api.auth.verify_code
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "code": "999999",
+    "ar": "t08fauusrm"
+  }
+}

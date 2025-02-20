@@ -7,6 +7,7 @@
  "field_order": [
   "email",
   "verification_code",
+  "completed",
   "column_break_cnlo",
   "first_name",
   "last_name"
@@ -22,8 +23,7 @@
   {
    "fieldname": "verification_code",
    "fieldtype": "Data",
-   "label": "Verification Code",
-   "reqd": 1
+   "label": "Verification Code"
   },
   {
    "fieldname": "column_break_cnlo",
@@ -40,11 +40,17 @@
    "fieldtype": "Data",
    "label": "Last Name",
    "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "completed",
+   "fieldtype": "Check",
+   "label": "Completed"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-20 22:59:36.846846",
+ "modified": "2025-02-21 00:49:04.679215",
  "modified_by": "Administrator",
  "module": "Ctf",
  "name": "Account Request",

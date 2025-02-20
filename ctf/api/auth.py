@@ -10,11 +10,13 @@ VERIFICATION_CODE_KEY_FORMAT = "user_verification_code||{}"
 @frappe.whitelist(allow_guest=True, methods=["POST"])
 def login(email: str):
 	# check if there is any CTF candidate with this email
-	if not frappe.db.exists("CTF Candidate", {"email": email}):
+	if not frappe.db.exists("CTF Candidate", {"user": email}):
 		frappe.throw("You do not have an account with this email. Please register.")
 
 	verification_code = generate_otp()
-	frappe.cache().set_value(VERIFICATION_CODE_KEY_FORMAT.format(email), verify_code, expires_in_sec=600)
+	frappe.cache().set_value(
+		VERIFICATION_CODE_KEY_FORMAT.format(email), verification_code, expires_in_sec=600
+	)
 	send_verification_mail(email, verification_code)
 
 
@@ -33,7 +35,6 @@ def resend_registration_code(ar: str):
 
 
 @frappe.whitelist(allow_guest=True, methods=["POST"])
-@rate_limit(limit=5, seconds=60 * 60)
 def verify_code(
 	code: str,
 	email: str | None = None,
