@@ -5,26 +5,12 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "status",
-  "column_break_pxof",
   "user",
   "section_break_rmiv",
+  "setup_completed",
   "stages"
  ],
  "fields": [
-  {
-   "default": "Registration Pending",
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Status",
-   "options": "Registration Pending\nRegistration Completed\nSetting Up Stages\nStages Setup Completed",
-   "reqd": 1
-  },
-  {
-   "fieldname": "column_break_pxof",
-   "fieldtype": "Column Break"
-  },
   {
    "fieldname": "user",
    "fieldtype": "Link",
@@ -43,11 +29,17 @@
    "fieldtype": "Table",
    "label": "Stages",
    "options": "CTF Candidate Stage"
+  },
+  {
+   "default": "0",
+   "fieldname": "setup_completed",
+   "fieldtype": "Check",
+   "label": "Setup Completed"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-02-21 00:04:45.613329",
+ "modified": "2025-02-21 01:06:14.310040",
  "modified_by": "Administrator",
  "module": "Ctf",
  "name": "CTF Candidate",
