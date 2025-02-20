@@ -1,0 +1,73 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2025-02-20 20:09:37.686094",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "stage",
+  "correct_flag",
+  "submitted_flag",
+  "correct",
+  "points",
+  "variables"
+ ],
+ "fields": [
+  {
+   "fieldname": "stage",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Stage",
+   "options": "CTF Stage",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "correct_flag",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Correct Flag",
+   "reqd": 1
+  },
+  {
+   "fieldname": "submitted_flag",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Submitted Flag",
+   "reqd": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "correct",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Correct"
+  },
+  {
+   "default": "0",
+   "fieldname": "points",
+   "fieldtype": "Int",
+   "label": "Points",
+   "non_negative": 1
+  },
+  {
+   "default": "{}",
+   "fieldname": "variables",
+   "fieldtype": "JSON",
+   "label": "Variables"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2025-02-20 22:51:34.907275",
+ "modified_by": "Administrator",
+ "module": "Ctf",
+ "name": "CTF Candidate Stage",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": []
+}
