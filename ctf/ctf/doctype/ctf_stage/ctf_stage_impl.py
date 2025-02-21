@@ -43,15 +43,39 @@ frappe.response['message'] = "Hi, you got close to your flag"
 
 
 def setup_stage_02(candidate: CTFCandidate, flag: str) -> dict[str, str]:
-	pass
+	return {}
 
 
 def setup_stage_03(candidate: CTFCandidate, flag: str) -> dict[str, str]:
-	pass
+	return {}
 
 
 def setup_stage_04(candidate: CTFCandidate, flag: str) -> dict[str, str]:
-	pass
+	return {}
+
+
+def setup_stage_05(candidate: CTFCandidate, flag: str) -> dict[str, str]:
+	return {}
+
+
+def setup_stage_06(candidate: CTFCandidate, flag: str) -> dict[str, str]:
+	return {}
+
+
+def setup_stage_07(candidate: CTFCandidate, flag: str) -> dict[str, str]:
+	return {}
+
+
+def setup_stage_08(candidate: CTFCandidate, flag: str) -> dict[str, str]:
+	return {}
+
+
+def setup_stage_09(candidate: CTFCandidate, flag: str) -> dict[str, str]:
+	return {}
+
+
+def setup_stage_10(candidate: CTFCandidate, flag: str) -> dict[str, str]:
+	return {}
 
 
 # Abstraction + Utility functions
@@ -61,6 +85,12 @@ STAGE_IMPLEMENTATIONS = {
 	"STAGE-02": setup_stage_02,
 	"STAGE-03": setup_stage_03,
 	"STAGE-04": setup_stage_04,
+	"STAGE-05": setup_stage_05,
+	"STAGE-06": setup_stage_06,
+	"STAGE-07": setup_stage_07,
+	"STAGE-08": setup_stage_08,
+	"STAGE-09": setup_stage_09,
+	"STAGE-10": setup_stage_10,
 }
 
 
