@@ -1,0 +1,11 @@
+[
+ {
+  "description": "Hello\n\nTry out this url - {{FLAG_URL}}",
+  "docstatus": 0,
+  "doctype": "CTF Stage",
+  "modified": "2025-02-21 20:40:13.734518",
+  "name": "STAGE-01",
+  "points": 100,
+  "title": "Read API Response"
+ }
+]

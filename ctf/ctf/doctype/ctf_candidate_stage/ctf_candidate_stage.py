@@ -21,7 +21,7 @@ class CTFCandidateStage(Document):
 		parenttype: DF.Data
 		points: DF.Int
 		stage: DF.Link
-		submitted_flag: DF.Data
+		submitted_flag: DF.Data | None
 		variables: DF.JSON | None
 	# end: auto-generated types
 

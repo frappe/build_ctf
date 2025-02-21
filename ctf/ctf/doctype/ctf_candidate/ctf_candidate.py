@@ -6,7 +6,7 @@ import json
 import frappe
 from frappe.model.document import Document
 
-from ctf.ctf.doctype.ctf_stage.ctf_stage_impl import STAGE_IMPLEMENTATIONS
+from ctf.ctf.doctype.ctf_stage.ctf_stage_impl import setup_stage
 
 
 class CTFCandidate(Document):
@@ -33,16 +33,14 @@ class CTFCandidate(Document):
 		stages = frappe.get_all("CTF Stage", pluck="name")
 
 		for stage in stages:
-			if stage not in STAGE_IMPLEMENTATIONS:
-				frappe.throw(f"Stage {stage} not implemented")
-
-			flag, variables = STAGE_IMPLEMENTATIONS[stage](self)
-			self.stages.append(
+			flag, variables = setup_stage(stage, self)
+			self.append(
+				"stages",
 				{
 					"stage": stage,
 					"correct_flag": flag,
 					"variables": json.dumps(variables),
-				}
+				},
 			)
 
 		self.setup_completed = 1

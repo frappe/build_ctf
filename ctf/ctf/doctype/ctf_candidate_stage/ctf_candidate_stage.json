@@ -34,8 +34,7 @@
    "fieldname": "submitted_flag",
    "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "Submitted Flag",
-   "reqd": 1
+   "label": "Submitted Flag"
   },
   {
    "default": "0",
@@ -48,6 +47,7 @@
    "default": "0",
    "fieldname": "points",
    "fieldtype": "Int",
+   "in_list_view": 1,
    "label": "Points",
    "non_negative": 1
   },
@@ -61,7 +61,7 @@
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2025-02-21 01:10:21.417646",
+ "modified": "2025-02-21 20:21:49.406017",
  "modified_by": "Administrator",
  "module": "Ctf",
  "name": "CTF Candidate Stage",
