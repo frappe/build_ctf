@@ -19,8 +19,8 @@ def (candidate: CTFCandidate, flag:str) -> dict[str, str]
 Return dictionary of variables, which will be stored in the candidate stage
 """
 
-# Implementations
 
+# Implementations
 def setup_stage_01(candidate: CTFCandidate, flag: str) -> dict[str, str]:
 	# Create a server script
 	api_method = f"stage-01-{candidate.name}"
@@ -42,10 +42,25 @@ frappe.response['message'] = "Hi, you got close to your flag"
 	return {"FLAG_PAGE_URL": f"/stage-01/{api_method}"}
 
 
+def setup_stage_02(candidate: CTFCandidate, flag: str) -> dict[str, str]:
+	pass
+
+
+def setup_stage_03(candidate: CTFCandidate, flag: str) -> dict[str, str]:
+	pass
+
+
+def setup_stage_04(candidate: CTFCandidate, flag: str) -> dict[str, str]:
+	pass
+
+
 # Abstraction + Utility functions
 
 STAGE_IMPLEMENTATIONS = {
 	"STAGE-01": setup_stage_01,
+	"STAGE-02": setup_stage_02,
+	"STAGE-03": setup_stage_03,
+	"STAGE-04": setup_stage_04,
 }
 
 
