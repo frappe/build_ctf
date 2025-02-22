@@ -3,11 +3,17 @@
 
 from __future__ import annotations
 
+import json
 from typing import TYPE_CHECKING
 
 import frappe
 
-from ctf.ctf.doctype.ctf_stage.ctf_stage_assets import STAGE_02_JS
+from ctf.ctf.doctype.ctf_stage.ctf_stage_assets import (
+	get_stage_02_js,
+	get_stage_03_js,
+	get_stage_03_js_map,
+	get_stage_03_js_minified,
+)
 from ctf.utils import generate_flag
 
 if TYPE_CHECKING:
@@ -51,7 +57,7 @@ def setup_stage_02(candidate: CTFCandidate, flag: str) -> dict[str, str]:
 			"file_name": f"stage-02-{candidate.name}.js",
 			"attached_to_doctype": None,
 			"attached_to_name": None,
-			"content": STAGE_02_JS.replace("{{FLAG_CHARACTERS}}", flag_characters),
+			"content": get_stage_02_js().replace("{{FLAG_CHARACTERS}}", flag_characters),
 			"is_private": 1,
 			"owner": candidate.user,
 		}
@@ -63,7 +69,58 @@ def setup_stage_02(candidate: CTFCandidate, flag: str) -> dict[str, str]:
 
 
 def setup_stage_03(candidate: CTFCandidate, flag: str) -> dict[str, str]:
-	return {}
+	flag_characters = flag.replace("FLAG{", "").replace("}", "")
+	hash = frappe.generate_hash(length=10)
+	base_url = frappe.utils.get_url()
+	base_file_name = f"stage-03-{candidate.name}-{hash}"
+	js_file_name = f"{base_file_name}.js"
+	min_js_file_name = f"{base_file_name}.min.js"
+	map_file_name = f"{base_file_name}.map"
+	min_js_content = get_stage_03_js_minified()
+	js_content = get_stage_03_js()
+
+	frappe.get_doc(
+		{
+			"doctype": "File",
+			"file_name": js_file_name,
+			"attached_to_doctype": None,
+			"attached_to_name": None,
+			"content": js_content.replace("FLAG_CHARACTERS", flag_characters),
+			"is_private": 1,
+			"owner": candidate.user,
+		}
+	).insert()
+
+	frappe.get_doc(
+		{
+			"doctype": "File",
+			"file_name": min_js_file_name,
+			"attached_to_doctype": None,
+			"attached_to_name": None,
+			"content": min_js_content.replace("FLAG_CHARACTERS}}", flag_characters)
+			+ f"\n//# sourceMappingURL={base_url}/private/files/{map_file_name}",
+			"is_private": 1,
+			"owner": candidate.user,
+		}
+	).insert()
+
+	js_file_map = get_stage_03_js_map()
+	js_file_map["file"] = f"{base_url}/private/files/{min_js_file_name}"
+	js_file_map["sources"] = [f"{base_url}/private/files/{js_file_name}"]
+	frappe.get_doc(
+		{
+			"doctype": "File",
+			"file_name": map_file_name,
+			"attached_to_doctype": None,
+			"attached_to_name": None,
+			"content": json.dumps(js_file_map),
+			"is_private": 1,
+			"owner": candidate.user,
+		}
+	).insert()
+	return {
+		"FLAG_PAGE_ROUTE": f"/stage-03/{base_file_name}",
+	}
 
 
 def setup_stage_04(candidate: CTFCandidate, flag: str) -> dict[str, str]:
