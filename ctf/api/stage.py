@@ -46,6 +46,20 @@ def validate_verification_code(code: str):
 	return response
 
 
+# Stage 10
+@frappe.whitelist()
+def check_flag(flag) -> str:
+	candidate = current_ctf_candidate()
+	flag = frappe.get_value(
+		"CTF Candidate Stage",
+		{"stage": "STAGE-10", "parent": candidate, "correct_flag": flag},
+		"correct_flag",
+	)
+	if flag:
+		return "Your flag is " + flag
+	return "Invalid flag"
+
+
 # Utility functions
 def current_ctf_candidate() -> str:
 	if frappe.session.user == "Guest":
