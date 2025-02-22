@@ -6,16 +6,17 @@ from ctf.utils import generate_otp
 
 
 # Stage 04
-@frappe.whitelist(methods=["GET"])
+@frappe.whitelist()
 def is_correct_flag(submitted_flag: str):
 	try:
 		correct_flag = get_correct_flag("STAGE-04")
 		if submitted_flag != correct_flag:
 			return 1 / 0
 		else:
-			return correct_flag
+			return "Your flag is " + correct_flag
 	except:  # noqa: E722
 		frappe.local.response["http_status_code"] = 500
+		frappe.local.response["is_error"] = True
 		return frappe.get_traceback(with_context=True)
 
 
