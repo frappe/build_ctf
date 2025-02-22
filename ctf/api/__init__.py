@@ -1,8 +1,9 @@
 import json
+
 import frappe
+import frappe.utils
 
 from ctf.api.stage import current_ctf_candidate
-import frappe.utils
 
 
 @frappe.whitelist()
