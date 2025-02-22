@@ -5,29 +5,27 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "status",
-  "registration_enabled"
+  "registration_enabled",
+  "status"
  ],
  "fields": [
-  {
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "in_list_view": 1,
-   "label": "Status",
-   "options": "Not Started\nStarted\nEnded",
-   "reqd": 1
-  },
   {
    "default": "0",
    "fieldname": "registration_enabled",
    "fieldtype": "Check",
    "label": "Registration Enabled"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Not Started\nStarted\nEnded"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2025-02-20 22:50:59.448148",
+ "modified": "2025-02-22 18:02:34.169204",
  "modified_by": "Administrator",
  "module": "Ctf",
  "name": "CTF Settings",

@@ -1,7 +1,7 @@
 # Copyright (c) 2025, Frappe and contributors
 # For license information, please see license.txt
 
-# import frappe
+import frappe
 from frappe.model.document import Document
 
 
@@ -25,4 +25,8 @@ class CTFCandidateStage(Document):
 		variables: DF.JSON | None
 	# end: auto-generated types
 
-	pass
+	def submit_flag(self, flag: str):
+		self.submitted_flag = flag.strip()
+		self.correct = self.correct_flag == flag
+		self.points = frappe.get_value("CTF Stage", self.stage, "points") if self.correct else 0
+		self.save()

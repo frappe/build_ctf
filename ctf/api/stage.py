@@ -64,7 +64,7 @@ def check_flag(flag) -> str:
 def current_ctf_candidate() -> str:
 	if frappe.session.user == "Guest":
 		frappe.throw("You are not logged in")
-	return frappe.get_value("CTF Candidate", {"user": frappe.session.user}, "name")
+	return frappe.get_cached_value("CTF Candidate", {"user": frappe.session.user}, "name")
 
 
 def get_correct_flag(stage: str) -> str:
