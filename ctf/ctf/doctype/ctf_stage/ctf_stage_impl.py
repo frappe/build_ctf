@@ -128,6 +128,19 @@ def setup_stage_04(candidate: CTFCandidate, flag: str) -> dict[str, str]:
 
 
 def setup_stage_05(candidate: CTFCandidate, flag: str) -> dict[str, str]:
+	current_user = frappe.session.user
+	try:
+		frappe.set_user(candidate.user)
+		frappe.get_doc(
+			{
+				"doctype": "File",
+				"file_name": "memento.txt",
+				"content": f"Your got the flag {flag}",
+				"is_private": 1,
+			}
+		).insert(ignore_permissions=True)
+	finally:
+		frappe.set_user(current_user)
 	return {}
 
 
