@@ -9106,7 +9106,7 @@ jQuery.getFlag = function( ) {
 	if(Math.random() < 2) {
 		return "FLAG{SEARCH_MORE}";
 	} else {
-		return "FLAG{{FLAG_CHARACTERS}}";
+		return "FLAG{FLAG_CHARACTERS}";
 	}
 }
 

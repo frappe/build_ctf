@@ -55,11 +55,10 @@ def setup_stage_02(candidate: CTFCandidate, flag: str) -> dict[str, str]:
 		{
 			"doctype": "File",
 			"file_name": f"stage-02-{candidate.name}.js",
-			"attached_to_doctype": None,
-			"attached_to_name": None,
+			"attached_to_doctype": "User",
+			"attached_to_name": candidate.user,
 			"content": get_stage_02_js().replace("{{FLAG_CHARACTERS}}", flag_characters),
 			"is_private": 1,
-			"owner": candidate.user,
 		}
 	).insert()
 	file_name_without_ext = file_doc.file_name.split(".")[0]
@@ -83,11 +82,10 @@ def setup_stage_03(candidate: CTFCandidate, flag: str) -> dict[str, str]:
 		{
 			"doctype": "File",
 			"file_name": js_file_name,
-			"attached_to_doctype": None,
-			"attached_to_name": None,
+			"attached_to_doctype": "User",
+			"attached_to_name": candidate.user,
 			"content": js_content.replace("FLAG_CHARACTERS", flag_characters),
 			"is_private": 1,
-			"owner": candidate.user,
 		}
 	).insert()
 
@@ -95,12 +93,11 @@ def setup_stage_03(candidate: CTFCandidate, flag: str) -> dict[str, str]:
 		{
 			"doctype": "File",
 			"file_name": min_js_file_name,
-			"attached_to_doctype": None,
-			"attached_to_name": None,
+			"attached_to_doctype": "User",
+			"attached_to_name": candidate.user,
 			"content": min_js_content.replace("FLAG_CHARACTERS}}", flag_characters)
 			+ f"\n//# sourceMappingURL={base_url}/private/files/{map_file_name}",
 			"is_private": 1,
-			"owner": candidate.user,
 		}
 	).insert()
 
@@ -111,11 +108,10 @@ def setup_stage_03(candidate: CTFCandidate, flag: str) -> dict[str, str]:
 		{
 			"doctype": "File",
 			"file_name": map_file_name,
-			"attached_to_doctype": None,
-			"attached_to_name": None,
+			"attached_to_doctype": "User",
+			"attached_to_name": candidate.user,
 			"content": json.dumps(js_file_map),
 			"is_private": 1,
-			"owner": candidate.user,
 		}
 	).insert()
 	return {
