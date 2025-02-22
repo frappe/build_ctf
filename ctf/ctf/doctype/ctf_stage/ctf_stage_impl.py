@@ -3,7 +3,11 @@
 
 from __future__ import annotations
 
+import contextlib
 import json
+import os
+import subprocess
+import tempfile
 from typing import TYPE_CHECKING
 
 import frappe
@@ -13,6 +17,7 @@ from ctf.ctf.doctype.ctf_stage.ctf_stage_assets import (
 	get_stage_03_js,
 	get_stage_03_js_map,
 	get_stage_03_js_minified,
+	get_stage_08_c_source,
 )
 from ctf.utils import generate_flag
 
@@ -153,7 +158,41 @@ def setup_stage_07(candidate: CTFCandidate, flag: str) -> dict[str, str]:
 
 
 def setup_stage_08(candidate: CTFCandidate, flag: str) -> dict[str, str]:
-	return {}
+	flag_characters = flag.replace("FLAG{", "").replace("}", "")
+	tmp_source_file_name = "/tmp/stage-08-" + frappe.generate_hash(length=30) + ".c"
+	with open(tmp_source_file_name, "w") as f:
+		f.write(get_stage_08_c_source().replace("FLAG_CHARACTERS", flag_characters))
+
+	tmp_dest_file_name = "/tmp/stage-08-" + frappe.generate_hash(length=30) + ".out"
+	subprocess.run(["gcc", tmp_source_file_name, "-o", tmp_dest_file_name], check=True)
+
+	# read and store in file
+	with open(tmp_dest_file_name, "rb") as f:
+		filecontent = f.read()
+
+	current_user = frappe.session.user
+
+	try:
+		frappe.set_user(candidate.user)
+
+		file = frappe.get_doc(
+			{
+				"doctype": "File",
+				"file_name": tmp_dest_file_name.split("/")[-1],
+				"content": filecontent,
+				"is_private": 1,
+			}
+		).insert(ignore_permissions=True)
+	finally:
+		frappe.set_user(current_user)
+
+	with contextlib.suppress(Exception):
+		os.remove(tmp_source_file_name)
+		os.remove(tmp_dest_file_name)
+
+	return {
+		"BINARY_FILE_URL": file.file_url,
+	}
 
 
 def setup_stage_09(candidate: CTFCandidate, flag: str) -> dict[str, str]:

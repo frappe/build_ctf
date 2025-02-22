@@ -44,3 +44,27 @@ def get_stage_03_js_map() -> str:
 def get_stage_03_js_minified() -> str:
 	with open(os.path.join(frappe.get_app_path("ctf"), "stage_assets", "stage_03.min.js")) as f:
 		return f.read()
+
+
+def get_stage_08_c_source() -> str:
+	return """#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char input[100];
+    printf("Enter passcode to view the flag: ");
+    scanf("%99s", input);
+
+    const char *flag = "FLAG{FLAG_CHARACTERS}";
+    asm volatile("" : : "r"(flag));  // Prevents compiler optimization
+
+    if (0) { // <-- bug
+        printf("Congrats! You got the flag!");
+        printf("The flag is : %s", flag);
+    } else {
+        printf("Sorry, wrong passcode");
+        printf("Try again");
+    }
+
+    return 0;
+}"""
