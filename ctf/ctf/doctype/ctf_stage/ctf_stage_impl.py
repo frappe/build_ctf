@@ -50,73 +50,77 @@ frappe.response['message'] = "Hi, you got close to your flag"
 
 
 def setup_stage_02(candidate: CTFCandidate, flag: str) -> dict[str, str]:
-	flag_characters = flag.replace("FLAG{", "").replace("}", "")
-	file_doc = frappe.get_doc(
-		{
-			"doctype": "File",
-			"file_name": f"stage-02-{candidate.name}.js",
-			"attached_to_doctype": "User",
-			"attached_to_name": candidate.user,
-			"content": get_stage_02_js().replace("{{FLAG_CHARACTERS}}", flag_characters),
-			"is_private": 1,
+	current_user = frappe.session.user
+	frappe.set_user(candidate.user)
+	try:
+		flag_characters = flag.replace("FLAG{", "").replace("}", "")
+		file_doc = frappe.get_doc(
+			{
+				"doctype": "File",
+				"file_name": f"stage-02-{candidate.name}.js",
+				"content": get_stage_02_js().replace("{{FLAG_CHARACTERS}}", flag_characters),
+				"is_private": 1,
+			}
+		).insert(ignore_permissions=True)
+		file_name_without_ext = file_doc.file_name.split(".")[0]
+		return {
+			"FLAG_PAGE_ROUTE": f"/stage-02/{file_name_without_ext}",
 		}
-	).insert()
-	file_name_without_ext = file_doc.file_name.split(".")[0]
-	return {
-		"FLAG_PAGE_ROUTE": f"/stage-02/{file_name_without_ext}",
-	}
+	finally:
+		frappe.set_user(current_user)
 
 
 def setup_stage_03(candidate: CTFCandidate, flag: str) -> dict[str, str]:
-	flag_characters = flag.replace("FLAG{", "").replace("}", "")
-	hash = frappe.generate_hash(length=10)
-	base_url = frappe.utils.get_url()
-	base_file_name = f"stage-03-{candidate.name}-{hash}"
-	js_file_name = f"{base_file_name}.js"
-	min_js_file_name = f"{base_file_name}.min.js"
-	map_file_name = f"{base_file_name}.map"
-	min_js_content = get_stage_03_js_minified()
-	js_content = get_stage_03_js()
+	current_user = frappe.session.user
+	try:
+		frappe.set_user(candidate.user)
+		flag_characters = flag.replace("FLAG{", "").replace("}", "")
+		hash = frappe.generate_hash(length=10)
+		base_url = frappe.utils.get_url()
+		base_file_name = f"stage-03-{candidate.name}-{hash}"
+		js_file_name = f"{base_file_name}.js"
+		min_js_file_name = f"{base_file_name}.min.js"
+		map_file_name = f"{base_file_name}.map"
+		min_js_content = get_stage_03_js_minified()
+		js_content = get_stage_03_js()
 
-	frappe.get_doc(
-		{
-			"doctype": "File",
-			"file_name": js_file_name,
-			"attached_to_doctype": "User",
-			"attached_to_name": candidate.user,
-			"content": js_content.replace("FLAG_CHARACTERS", flag_characters),
-			"is_private": 1,
-		}
-	).insert()
+		frappe.set_user(candidate.user)
 
-	frappe.get_doc(
-		{
-			"doctype": "File",
-			"file_name": min_js_file_name,
-			"attached_to_doctype": "User",
-			"attached_to_name": candidate.user,
-			"content": min_js_content.replace("FLAG_CHARACTERS}}", flag_characters)
-			+ f"\n//# sourceMappingURL={base_url}/private/files/{map_file_name}",
-			"is_private": 1,
-		}
-	).insert()
+		frappe.get_doc(
+			{
+				"doctype": "File",
+				"file_name": js_file_name,
+				"content": js_content.replace("FLAG_CHARACTERS", flag_characters),
+				"is_private": 1,
+			}
+		).insert(ignore_permissions=True)
 
-	js_file_map = get_stage_03_js_map()
-	js_file_map["file"] = f"{base_url}/private/files/{min_js_file_name}"
-	js_file_map["sources"] = [f"{base_url}/private/files/{js_file_name}"]
-	frappe.get_doc(
-		{
-			"doctype": "File",
-			"file_name": map_file_name,
-			"attached_to_doctype": "User",
-			"attached_to_name": candidate.user,
-			"content": json.dumps(js_file_map),
-			"is_private": 1,
+		frappe.get_doc(
+			{
+				"doctype": "File",
+				"file_name": min_js_file_name,
+				"content": min_js_content.replace("FLAG_CHARACTERS}}", flag_characters)
+				+ f"\n//# sourceMappingURL={base_url}/private/files/{map_file_name}",
+				"is_private": 1,
+			}
+		).insert(ignore_permissions=True)
+
+		js_file_map = get_stage_03_js_map()
+		js_file_map["file"] = f"{base_url}/private/files/{min_js_file_name}"
+		js_file_map["sources"] = [f"{base_url}/private/files/{js_file_name}"]
+		frappe.get_doc(
+			{
+				"doctype": "File",
+				"file_name": map_file_name,
+				"content": json.dumps(js_file_map),
+				"is_private": 1,
+			}
+		).insert(ignore_permissions=True)
+		return {
+			"FLAG_PAGE_ROUTE": f"/stage-03/{base_file_name}",
 		}
-	).insert()
-	return {
-		"FLAG_PAGE_ROUTE": f"/stage-03/{base_file_name}",
-	}
+	finally:
+		frappe.set_user(current_user)
 
 
 def setup_stage_04(candidate: CTFCandidate, flag: str) -> dict[str, str]:

@@ -56,3 +56,11 @@ class CTFCandidate(Document):
 		self.stages = []
 		self.setup_completed = 0
 		self.save()
+
+
+def has_file_permission(doc, ptype, user):
+	if frappe.session.data.user_type == "System User":
+		return True
+	if ptype != "read":
+		return False
+	return doc.owner == user
