@@ -2,7 +2,6 @@ import frappe
 
 # This file contains only Stage Specific APIs
 
-
 # Stage 04
 @frappe.whitelist(methods=["GET"])
 def is_correct_flag(submitted_flag: str):

@@ -5,6 +5,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from ctf.ctf.doctype.ctf_stage.ctf_stage_assets import STAGE_02_JS
 import frappe
 
 from ctf.utils import generate_flag
@@ -27,7 +28,7 @@ def setup_stage_01(candidate: CTFCandidate, flag: str) -> dict[str, str]:
 	frappe.get_doc(
 		{
 			"doctype": "Server Script",
-			"name": f"STAGE-01-{candidate.name}",
+			"name": api_method,
 			"api_method": api_method,
 			"script_type": "API",
 			"disabled": 0,
@@ -39,11 +40,26 @@ frappe.response['message'] = "Hi, you got close to your flag"
 		}
 	).insert()
 
-	return {"FLAG_PAGE_URL": f"/stage-01/{api_method}"}
+	return {"FLAG_PAGE_ROUTE": f"/stage-01/{api_method}"}
 
 
 def setup_stage_02(candidate: CTFCandidate, flag: str) -> dict[str, str]:
-	return {}
+	flag_characters = flag.replace("FLAG{", "").replace("}", "")
+	file_doc = frappe.get_doc(
+		{
+			"doctype": "File",
+			"file_name": f"stage-02-{candidate.name}.js",
+			"attached_to_doctype": None,
+			"attached_to_name": None,
+			"content": STAGE_02_JS.replace("{{FLAG_CHARACTERS}}", flag_characters),
+			"is_private": 1,
+			"owner": candidate.user,
+		}
+	).insert()
+	file_name_without_ext = file_doc.file_name.split(".")[0]
+	return {
+		"FLAG_PAGE_ROUTE": f"/stage-02/{file_name_without_ext}",
+	}
 
 
 def setup_stage_03(candidate: CTFCandidate, flag: str) -> dict[str, str]:

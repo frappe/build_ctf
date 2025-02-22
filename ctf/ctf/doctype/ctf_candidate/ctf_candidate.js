@@ -7,6 +7,10 @@ frappe.ui.form.on("CTF Candidate", {
 			frm.add_custom_button(__("Setup Stages"), () => {
 				frm.call("setup_stages");
 			});
+		} else {
+			frm.add_custom_button(__("Cleanup Stages"), () => {
+				frm.call("cleanup_stages");
+			});
 		}
 	},
 });

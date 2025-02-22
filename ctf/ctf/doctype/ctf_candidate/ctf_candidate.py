@@ -30,7 +30,7 @@ class CTFCandidate(Document):
 		frappe.enqueue_doc("CTF Candidate", self.name, "_setup_stages")
 
 	def _setup_stages(self):
-		stages = frappe.get_all("CTF Stage", pluck="name")
+		stages = frappe.get_all("CTF Stage", pluck="name", order_by="name")
 
 		for stage in stages:
 			flag, variables = setup_stage(stage, self)
@@ -44,4 +44,15 @@ class CTFCandidate(Document):
 			)
 
 		self.setup_completed = 1
+		self.save()
+
+	@frappe.whitelist()
+	def cleanup_stages(self):
+		# server script cleanup
+		frappe.delete_doc(
+			"Server Script", f"stage-01-{self.name}", delete_permanently=True, ignore_missing=True
+		)
+		# delete all stages
+		self.stages = []
+		self.setup_completed = 0
 		self.save()
