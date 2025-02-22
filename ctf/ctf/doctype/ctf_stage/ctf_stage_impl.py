@@ -5,9 +5,9 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from ctf.ctf.doctype.ctf_stage.ctf_stage_assets import STAGE_02_JS
 import frappe
 
+from ctf.ctf.doctype.ctf_stage.ctf_stage_assets import STAGE_02_JS
 from ctf.utils import generate_flag
 
 if TYPE_CHECKING:

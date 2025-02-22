@@ -18,7 +18,7 @@ def is_correct_flag(submitted_flag: str):
 			return 1 / 0
 		else:
 			return correct_flag
-	except:
+	except:  # noqa: E722
 		frappe.local.response["http_status_code"] = 500
 		return frappe.get_traceback(with_context=True)
 
