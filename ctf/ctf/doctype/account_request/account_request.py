@@ -95,4 +95,9 @@ def send_verification_mail(email: str, code: str):
 		print("Sending verification mail to", email)
 		print("Verification code:", code)
 		return
-	# TODO send verification mail
+	frappe.sendmail(
+		recipients=email,
+		subject=f"{code} - CTF Verification Code",
+		message=f"Verification Code to login to Frappe CTF: {code}",
+		now=True,
+	)
