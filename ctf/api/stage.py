@@ -1,3 +1,5 @@
+import os
+
 import frappe
 
 from ctf.utils import generate_otp
@@ -26,7 +28,8 @@ def send_verification_code(email: str):
 	if email != "administrator@ctfsite.com":
 		frappe.throw("Invalid email address. Only administrator@ctfsite.com is allowed")
 	otp_key = "stage_06_verification_code||" + frappe.session.user
-	frappe.cache().set_value(otp_key, generate_otp(), expires_in_sec=1200)
+	otp = str(int.from_bytes(os.urandom(6), byteorder="big") % 9000 + 1000)
+	frappe.cache().set_value(otp_key, otp, expires_in_sec=1200)
 	response = f"OTP Sent to {email} and valid for 20 minutes"
 	frappe.msgprint(response)
 	return response
