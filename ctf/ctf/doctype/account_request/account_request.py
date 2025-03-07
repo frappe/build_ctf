@@ -35,10 +35,7 @@ class AccountRequest(Document):
 		self.send_otp()
 
 	def send_otp(self):
-		if frappe.conf.developer_mode and frappe.local.dev_server:
-			self.verification_code = "999999"
-		else:
-			self.verification_code = generate_otp()
+		self.verification_code = generate_otp()
 
 		self.save()
 		send_verification_mail(self.email, self.verification_code)
