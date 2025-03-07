@@ -2,6 +2,7 @@
   "name": "frappe-ui-frontend",
   "private": true,
   "version": "0.0.0",
+  "module": "true",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -9,15 +10,24 @@
   },
   "dependencies": {
     "feather-icons": "^4.28.0",
-    "frappe-ui": "^0.0.105",
-    "vue": "^3.2.25",
-    "vue-router": "^4.0.12"
+    "frappe-ui": "0.1.108",
+    "markdown-it": "^14.1.0",
+    "markdown-it-abbr": "^2.0.0",
+    "markdown-it-anchor": "^9.0.1",
+    "markdown-it-footnote": "^4.0.0",
+    "markdown-it-highlightjs": "^4.1.0",
+    "markdown-it-sub": "^2.0.0",
+    "markdown-it-sup": "^2.0.0",
+    "markdown-it-task-lists": "^2.1.1",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0",
+    "vue-sonner": "^1.3.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.0.0",
     "autoprefixer": "^10.4.2",
     "postcss": "^8.4.5",
-    "tailwindcss": "^3.0.15",
-    "vite": "^2.7.2"
+    "tailwindcss": "^3.2.4",
+    "vite": "^6.2.0"
   }
 }

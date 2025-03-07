@@ -1,39 +1,81 @@
 <template>
-  <div class="max-w-3xl py-12 mx-auto">
-    <Button
-      icon-left="code"
-      @click="$resources.ping.fetch"
-      :loading="$resources.ping.loading"
-    >
-      Click to send 'ping' request
-    </Button>
-    <div>
-      {{ $resources.ping.data }}
-    </div>
-    <pre>{{ $resources.ping }}</pre>
-
-    <Button @click="showDialog = true">Open Dialog</Button>
-    <Dialog title="Title" v-model="showDialog"> Dialog content </Dialog>
-  </div>
+	<div class="p-10">
+		<ListView
+			class="h-[150px]"
+			:columns="[
+				{
+					label: 'Stage',
+					key: 'stage',
+					width: '100px',
+				},
+				{
+					label: 'Title',
+					key: 'title',
+				},
+				{
+					label: 'Points',
+					key: 'points',
+					width: '100px',
+				},
+				{
+					label: 'Status',
+					key: 'status',
+					width: '200px',
+					align: 'center',
+				},
+			]"
+			:rows="stages"
+			:options="{
+				onRowClick: (row) => openStageDialog(row),
+				selectable: false,
+				showTooltip: true,
+				resizeColumn: true,
+				emptyState: {
+					title: 'No Stages',
+					description: 'Please wait to publish CTF Stages',
+				},
+			}"
+			row-key="id"
+		>
+		</ListView>
+		<StageDialog
+			:stage="selectedStage"
+			:showDialog="showStageDialog"
+			@update:showDialog="(e) => (showStageDialog = e)"
+			:refreshStageList="() => {}"
+		/>
+	</div>
 </template>
 
-<script>
-import { Dialog } from 'frappe-ui'
+<script setup>
+import { ListView, createResource } from 'frappe-ui'
+import { computed, onMounted, ref } from 'vue'
+import StageDialog from '../components/StageDialog.vue'
 
-export default {
-  name: 'Home',
-  data() {
-    return {
-      showDialog: false,
-    }
-  },
-  resources: {
-    ping: {
-      url: 'ping',
-    },
-  },
-  components: {
-    Dialog,
-  },
+const showStageDialog = ref(false)
+const selectedStage = ref({})
+const resource = createResource({
+	url: '/api/method/ctf.api.stages',
+	auto: true,
+	method: 'GET',
+})
+
+const stages = computed(() => resource?.data?.message ?? [])
+
+const openStageDialog = (stage) => {
+	console.log(stage)
+	selectedStage.value = stage
+	showStageDialog.value = true
 }
+
+onMounted(() => {
+	const baseUrl = window.location.origin
+	console.log(
+		'👋 Hi, Welcome to Frappe Build CTF! 🚀\n\n' +
+			'You might be looking for the registration link.\n\n' +
+			'🔗 Visit: ' +
+			baseUrl +
+			'/frontend/cBSZTcX5OScQtKOScyahY9o3ShRcWDK6VqlBJl6CV2ZtB to register for the CTF',
+	)
+})
 </script>
