@@ -29,13 +29,24 @@
 				{
 					label: 'Points',
 					key: 'points',
-					width: '100px',
+					width: '80px',
 				},
 				{
 					label: 'Status',
 					key: 'status',
-					width: '200px',
+					width: '150px',
 					align: 'center',
+					// hacky way to show the badge
+					prefix: ({ row }) => {
+						return h(StageStatusBadge, {
+							// Show status badge
+							status: row.status,
+						})
+					},
+					getLabel: ({ row }) => {
+						// Show blank label
+						return ''
+					},
 				},
 			]"
 			:rows="stages"
@@ -63,8 +74,9 @@
 
 <script setup>
 import { ListView, createResource, Spinner } from 'frappe-ui'
-import { computed, onMounted, ref } from 'vue'
+import { computed, h, onMounted, ref } from 'vue'
 import StageDialog from '../components/StageDialog.vue'
+import StageStatusBadge from '../components/StageStatusBadge.vue'
 
 const showStageDialog = ref(false)
 const selectedStage = ref({})

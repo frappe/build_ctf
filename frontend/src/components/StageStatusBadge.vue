@@ -9,7 +9,6 @@
 	>
 		{{ status }}
 	</Badge>
-
 </template>
 <script setup>
 import { Badge } from 'frappe-ui'
@@ -24,5 +23,6 @@ const themeMap = {
 	'Not Attempted': 'gray',
 	'Correct Flag': 'green',
 	'Incorrect Flag': 'red',
+	'Not Registered': 'gray',
 }
 </script>
