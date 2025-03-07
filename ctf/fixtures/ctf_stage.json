@@ -1,45 +1,36 @@
 [
  {
-  "description": ".",
+  "description": "Hello\n\nDownload the binary - [Click Here]({{BINARY_FILE_URL}})",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-02-21 21:59:20.780876",
-  "name": "STAGE-02",
+  "modified": "2025-03-07 18:15:22.906096",
+  "name": "STAGE-08",
   "points": 100,
-  "title": "Read Client Side JS"
+  "title": "Sleuthing"
  },
  {
-  "description": ".",
+  "description": "Access the challenge here - [/stage-04](/stage-04)\n\nClue in code -\n```python\ndef is_correct_flag(submitted_flag: str):\n\ttry:\n\t\tcorrect_flag = get_correct_flag(\"STAGE-04\")\n\t\tif submitted_flag != correct_flag:\n\t\t\treturn 1 / 0\n\t\telse:\n\t\t\treturn \"Your flag is \" + correct_flag\n\texcept:\n\t\tfrappe.local.response[\"http_status_code\"] = 500\n\t\tfrappe.local.response[\"is_error\"] = True\n\t\treturn frappe.get_traceback(with_context=True)\n```",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-02-21 21:59:33.748153",
-  "name": "STAGE-03",
-  "points": 100,
-  "title": "Unminify"
- },
- {
-  "description": ".",
-  "docstatus": 0,
-  "doctype": "CTF Stage",
-  "modified": "2025-02-21 21:59:43.423078",
+  "modified": "2025-03-07 18:19:48.835785",
   "name": "STAGE-04",
   "points": 100,
   "title": "Password Leak"
  },
  {
-  "description": ".",
+  "description": "MEMENTO, You stored this flag in a file on this server and forgot which one!",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-02-21 22:31:32.188329",
+  "modified": "2025-03-07 18:20:43.284416",
   "name": "STAGE-05",
   "points": 100,
   "title": "REST API"
  },
  {
-  "description": ".",
+  "description": ".Access the challenge here - [/stage-06](/stage-06)",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-02-21 22:31:44.743690",
+  "modified": "2025-03-07 18:26:05.998734",
   "name": "STAGE-06",
   "points": 100,
   "title": "Brute Forcing OTP"
@@ -57,34 +48,43 @@
   "description": ".",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-02-21 22:32:05.310558",
-  "name": "STAGE-08",
-  "points": 100,
-  "title": "Sleuthing"
- },
- {
-  "description": ".",
-  "docstatus": 0,
-  "doctype": "CTF Stage",
   "modified": "2025-02-21 22:32:15.027540",
   "name": "STAGE-09",
   "points": 100,
   "title": "TBD2"
  },
  {
-  "description": ".",
+  "description": ".Access the challenge here - [/stage-10](/stage-10)\n\nSome code reference -\n\n```python\ndef check_flag(flag) -> str:\n\tcandidate = current_ctf_candidate()\n\tflag = frappe.get_value(\n\t\t\"CTF Candidate Stage\",\n\t\t{\"stage\": \"STAGE-10\", \"parent\": candidate, \"correct_flag\": flag},\n\t\t\"correct_flag\",\n\t)\n\tif flag:\n\t\treturn \"Your flag is \" + flag\n\treturn \"Invalid flag\"\n```",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-02-21 22:32:24.583060",
+  "modified": "2025-03-07 18:28:56.410317",
   "name": "STAGE-10",
   "points": 100,
   "title": "SQL Injection"
  },
  {
-  "description": "Hello\n\nTry out this url - {{FLAG_URL}}",
+  "description": "Hello\n\nTry out this url - [{{FLAG_PAGE_ROUTE}}]({{FLAG_PAGE_ROUTE}})",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-02-21 20:40:13.734518",
+  "modified": "2025-03-07 18:16:29.476418",
+  "name": "STAGE-02",
+  "points": 100,
+  "title": "Read Client Side JS"
+ },
+ {
+  "description": "Hello\n\nTry out this url - [{{FLAG_PAGE_ROUTE}}]({{FLAG_PAGE_ROUTE}})",
+  "docstatus": 0,
+  "doctype": "CTF Stage",
+  "modified": "2025-03-07 18:16:24.021732",
+  "name": "STAGE-03",
+  "points": 100,
+  "title": "Unminify"
+ },
+ {
+  "description": "Hello\n\nTry out this url - [{{FLAG_PAGE_ROUTE}}]({{FLAG_PAGE_ROUTE}})",
+  "docstatus": 0,
+  "doctype": "CTF Stage",
+  "modified": "2025-03-07 15:50:54.052444",
   "name": "STAGE-01",
   "points": 100,
   "title": "Read API Response"
