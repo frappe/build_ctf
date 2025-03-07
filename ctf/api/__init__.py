@@ -33,7 +33,7 @@ def stages():
 
 You will find a unique link somewhere in the page to register to this contest.
 """,
-				"points": 0,
+				"points": "0",
 				"variables": {},
 				"submitted": False,
 				"submitted_flag": "",
