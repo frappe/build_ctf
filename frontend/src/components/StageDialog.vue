@@ -113,6 +113,9 @@ const submitFlag = createResource({
 		stage_info.status = data.status
 		stage_info.correct = data.correct
 		props.refreshStageList()
+		if (stage_info.correct) {
+			updateShowDialog(false)
+		}
 	},
 })
 </script>
