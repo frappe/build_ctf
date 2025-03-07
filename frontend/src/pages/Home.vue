@@ -1,11 +1,10 @@
 <template>
 	<div class="p-10">
 		<ListView
-			class="h-[150px]"
 			:columns="[
 				{
 					label: 'Stage',
-					key: 'stage',
+					key: 'name',
 					width: '100px',
 				},
 				{
@@ -58,9 +57,10 @@ const resource = createResource({
 	url: '/api/method/ctf.api.stages',
 	auto: true,
 	method: 'GET',
+	initialData: [],
 })
 
-const stages = computed(() => resource?.data?.message ?? [])
+const stages = computed(() => resource?.data ?? [])
 
 const openStageDialog = (stage) => {
 	console.log(stage)

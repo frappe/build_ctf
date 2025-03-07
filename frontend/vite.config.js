@@ -10,7 +10,7 @@ export default defineConfig({
 	server: {
 		port: 8080,
     proxy: {
-        '^/(app|login|api|assets|files)': {
+        '^/(app|login|api|assets|files|stage)': {
           target: `http://localhost:${webserver_port}`,
           ws: true,
           router: function (req) {

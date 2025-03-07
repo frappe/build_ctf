@@ -11,6 +11,17 @@ import MarkdownItSub from 'markdown-it-sub'
 import MarkdownItSup from 'markdown-it-sup'
 import { computed } from 'vue'
 
+const props = defineProps({
+	content: {
+		type: String,
+		default: '',
+	},
+	variables: {
+		type: Object,
+		default: {},
+	},
+})
+
 const markdown = new MarkdownIt({
 	html: true,
 	typographer: true,
@@ -22,16 +33,17 @@ const markdown = new MarkdownIt({
 	.use(MarkdownItSub)
 	.use(MarkdownItSup)
 
-const props = defineProps({
-	content: {
-		type: String,
-		default: '',
-	},
-	variables: {
-		type: Object,
-		default: {},
-	},
-})
+// force open links in new tab
+const defaultRender =
+	markdown.renderer.rules.link_open ||
+	function (tokens, idx, options, env, self) {
+		return self.renderToken(tokens, idx, options)
+	}
+
+markdown.renderer.rules.link_open = function (tokens, idx, options, env, self) {
+	tokens[idx].attrSet('target', '_blank')
+	return defaultRender(tokens, idx, options, env, self)
+}
 
 const markdownContent = computed(() => {
 	let content = props.content

@@ -17,7 +17,7 @@ def stages():
 	if frappe.session.user == "Guest":
 		return [
 			{
-				"stage": "STAGE-0",
+				"name": "STAGE-0",
 				"title": "Register to CTF",
 				"description": """This is the first step towards the CTF.
 
@@ -38,7 +38,7 @@ You will find a unique link somewhere in the page to register to this contest.
 
 	"""
 	{
-		"stage": "STAGE-01",
+		"name": "STAGE-01",
 		"title" : "Title of the stage",
 		"description": "Description of the stage",
 		"points": 100,
@@ -70,7 +70,11 @@ You will find a unique link somewhere in the page to register to this contest.
 		stage["submitted"] = bool(candidate_stage.submitted_flag and len(candidate_stage.submitted_flag) > 0)
 		stage["correct"] = bool(candidate_stage.correct)
 		stage["status"] = (
-			"Not Submitted" if not stage["submitted"] else "Correct" if stage["correct"] else "Incorrect"
+			"Not Attempted"
+			if not stage["submitted"]
+			else "Correct Flag"
+			if stage["correct"]
+			else "Incorrect Flag"
 		)
 		stage["variables"] = json.loads(candidate_stage.variables)
 		stage["show_input"] = ctf_active
