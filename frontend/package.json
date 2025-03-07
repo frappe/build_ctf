@@ -5,7 +5,8 @@
   "module": "true",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build  --base=/assets/ctf/frontend/ && yarn copy-html-entry",
+    "copy-html-entry": "cp ../ctf/public/frontend/index.html ../ctf/www/frontend.html",
     "preview": "vite preview"
   },
   "dependencies": {

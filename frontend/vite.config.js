@@ -24,7 +24,7 @@ export default defineConfig({
 	resolve: {
 		alias: {
 			'@': path.resolve(__dirname, 'src'),
-      "tailwind.config.js": path.resolve(__dirname, "tailwind.config.js"),
+			"tailwind.config.js": path.resolve(__dirname, "tailwind.config.js"),
 		},
 	},
 	build: {
