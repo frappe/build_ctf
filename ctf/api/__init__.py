@@ -7,9 +7,19 @@ import frappe.utils
 from ctf.api.stage import current_ctf_candidate
 
 
-@frappe.whitelist()
+@frappe.whitelist(allow_guest=True)
 def status():
-	return {"setup_completed": is_setup_completed(), "ctf_status": get_ctf_status()}
+	data = {
+		"ctf_status": get_ctf_status(),
+		"logged_in": False,
+		"full_name": "Anonymous",
+		"setup_completed": True,  # to show the dummy stage-0
+	}
+	if frappe.session.user != "Guest":
+		data["logged_in"] = True
+		data["full_name"] = frappe.get_value("User", frappe.session.user, "full_name")
+		data["setup_completed"] = is_setup_completed()
+	return data
 
 
 @frappe.whitelist(allow_guest=True)

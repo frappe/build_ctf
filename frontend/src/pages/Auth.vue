@@ -181,7 +181,7 @@ const registerResource = createResource({
 	auto: false,
 	method: 'POST',
 	makeParams: () => ({
-		email: email,
+		email: email.value,
 		first_name: auth_info.first_name,
 		last_name: auth_info.last_name,
 	}),
@@ -197,7 +197,7 @@ const verifyCodeResource = createResource({
 	method: 'POST',
 	makeParams: () => ({
 		code: auth_info.verification_code,
-		email: auth_info.is_signup ? null : email,
+		email: auth_info.is_signup ? null : email.value,
 		ar: auth_info.is_signup ? auth_info.account_request : null,
 	}),
 	onSuccess: () => {

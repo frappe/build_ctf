@@ -1,6 +1,21 @@
 <template>
-	<div class="p-10">
+	<div class="p-5 w-screen">
+		<div class="w-full flex flex-row justify-between items-center pb-5">
+			<div>👋 Hi, {{ statusResource?.data?.full_name }}</div>
+			<Button iconLeft="log-out" @click="logout" v-if="statusResource.data.logged_in"
+				>Logout</Button
+			>
+		</div>
+		<div
+			class="h-[80vh] min-w-full flex justify-center items-center"
+			v-if="statusResource.data.logged_in && !statusResource.data.setup_completed"
+		>
+			<div class="flex flex-row gap-2 text-gray-900">
+				<Spinner class="w-4" /> Setting Up CTF Stages
+			</div>
+		</div>
 		<ListView
+			v-if="statusResource.data.setup_completed"
 			:columns="[
 				{
 					label: 'Stage',
@@ -47,7 +62,7 @@
 </template>
 
 <script setup>
-import { ListView, createResource } from 'frappe-ui'
+import { ListView, createResource, Spinner } from 'frappe-ui'
 import { computed, onMounted, ref } from 'vue'
 import StageDialog from '../components/StageDialog.vue'
 
@@ -59,12 +74,37 @@ const stagesResource = createResource({
 	method: 'GET',
 	initialData: [],
 })
-
 const stages = computed(() => stagesResource?.data ?? [])
+
+const statusResource = createResource({
+	url: '/api/method/ctf.api.status',
+	auto: true,
+	method: 'GET',
+	initialData: {},
+	onSuccess: (data) => {
+		if (data.logged_in) {
+			if (data.setup_completed) {
+				if (stages.value.length === 0) {
+					stagesResource.reload()
+				}
+			} else {
+				setTimeout(() => {
+					statusResource.reload()
+				}, 2000)
+			}
+		}
+	},
+})
 
 const openStageDialog = (stage) => {
 	selectedStage.value = stage
 	showStageDialog.value = true
+}
+
+const logout = () => {
+	fetch('/api/method/logout').then(() => {
+		window.location.href = '/'
+	})
 }
 
 onMounted(() => {
