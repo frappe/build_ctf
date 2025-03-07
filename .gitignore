@@ -55,3 +55,5 @@ jspm_packages/
 .aider*
 
 ctf/public/frontend
+frontend.html
+node_modules
