@@ -41,7 +41,7 @@
 			:stage="selectedStage"
 			:showDialog="showStageDialog"
 			@update:showDialog="(e) => (showStageDialog = e)"
-			:refreshStageList="() => {}"
+			:refreshStageList="() => stagesResource.reload()"
 		/>
 	</div>
 </template>
@@ -53,14 +53,14 @@ import StageDialog from '../components/StageDialog.vue'
 
 const showStageDialog = ref(false)
 const selectedStage = ref({})
-const resource = createResource({
+const stagesResource = createResource({
 	url: '/api/method/ctf.api.stages',
 	auto: true,
 	method: 'GET',
 	initialData: [],
 })
 
-const stages = computed(() => resource?.data ?? [])
+const stages = computed(() => stagesResource?.data ?? [])
 
 const openStageDialog = (stage) => {
 	console.log(stage)

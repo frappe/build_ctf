@@ -67,6 +67,8 @@ You will find a unique link somewhere in the page to register to this contest.
 		if not candidate_stage:
 			frappe.throw("Something is wrong. Please contact CTF admin.")
 
+		stage["points"] = str(stage["points"])  # TODO: fix it front end
+		stage["submitted_flag"] = candidate_stage.submitted_flag
 		stage["submitted"] = bool(candidate_stage.submitted_flag and len(candidate_stage.submitted_flag) > 0)
 		stage["correct"] = bool(candidate_stage.correct)
 		stage["status"] = (
@@ -86,7 +88,7 @@ You will find a unique link somewhere in the page to register to this contest.
 def submit_flag(stage: str, flag: str):
 	ctf_status = get_ctf_status()
 	if ctf_status != "Started":
-		frappe.throw("CTF is " + ctf_status)
+		frappe.throw("CTF has " + ctf_status)
 
 	candidate_stage_name = frappe.get_cached_value(
 		"CTF Candidate Stage", {"stage": stage, "parent": current_ctf_candidate()}, "name"
@@ -94,8 +96,14 @@ def submit_flag(stage: str, flag: str):
 	if not candidate_stage_name:
 		frappe.throw("Invalid stage")
 		return
+
 	candidate_stage = frappe.get_doc("CTF Candidate Stage", candidate_stage_name)
 	candidate_stage.submit_flag(flag)
+	return {
+		"submitted_flag": candidate_stage.submitted_flag,
+		"correct": bool(candidate_stage.correct),
+		"status": get_stage_status(bool(candidate_stage.submitted_flag), bool(candidate_stage.correct)),
+	}
 
 
 def is_setup_completed() -> bool:
@@ -108,3 +116,9 @@ def get_ctf_status() -> Literal["Not Started", "Started", "Ended"]:
 
 def is_ctf_active() -> bool:
 	return get_ctf_status() == "Started"
+
+
+def get_stage_status(is_submitted, is_correct):
+	if is_submitted:
+		return "Correct Flag" if is_correct else "Incorrect Flag"
+	return "Not Attempted"
