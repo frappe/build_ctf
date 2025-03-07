@@ -56,6 +56,7 @@ import { TextInput, Dialog, createResource } from 'frappe-ui'
 import MarkdownRenderer from './MarkdownRenderer.vue'
 import { reactive, watch } from 'vue'
 import StageStatusBadge from './StageStatusBadge.vue'
+import { toast } from 'vue-sonner'
 
 const props = defineProps({
 	stage: {
@@ -114,7 +115,10 @@ const submitFlag = createResource({
 		stage_info.correct = data.correct
 		props.refreshStageList()
 		if (stage_info.correct) {
-			updateShowDialog(false)
+			toast.success('You got the flag! 🎉')
+			setTimeout(() => {
+				updateShowDialog(false)
+			}, 1000)
 		}
 	},
 })
