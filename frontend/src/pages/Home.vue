@@ -63,7 +63,6 @@ const stagesResource = createResource({
 const stages = computed(() => stagesResource?.data ?? [])
 
 const openStageDialog = (stage) => {
-	console.log(stage)
 	selectedStage.value = stage
 	showStageDialog.value = true
 }

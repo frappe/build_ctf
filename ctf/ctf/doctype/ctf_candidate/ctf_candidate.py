@@ -25,9 +25,12 @@ class CTFCandidate(Document):
 		user: DF.Link
 	# end: auto-generated types
 
+	def after_insert(self):
+		self.setup_stages()
+
 	@frappe.whitelist()
 	def setup_stages(self):
-		frappe.enqueue_doc("CTF Candidate", self.name, "_setup_stages")
+		frappe.enqueue_doc("CTF Candidate", self.name, "_setup_stages", enqueue_after_commit=True)
 
 	def _setup_stages(self):
 		stages = frappe.get_all("CTF Stage", pluck="name", order_by="name")
@@ -56,6 +59,7 @@ class CTFCandidate(Document):
 		self.stages = []
 		self.setup_completed = 0
 		self.save()
+
 
 def has_file_permission(doc, ptype, user):
 	if frappe.session.data.user_type == "System User":

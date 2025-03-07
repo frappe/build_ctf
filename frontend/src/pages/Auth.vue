@@ -56,7 +56,7 @@
 									type="email"
 									placeholder="johndoe@mail.com"
 									autocomplete="email"
-									v-model="auth_info.email"
+									v-model="email"
 									required
 								/>
 								<div class="flex flex-row gap-4" v-if="auth_info.is_signup">
@@ -137,18 +137,25 @@
 
 <script setup>
 import { FormControl, Button, ErrorMessage, createResource } from 'frappe-ui'
-import LoadingText from 'frappe-ui/src/components/LoadingText.vue'
-import { reactive, ref } from 'vue'
+import { reactive, ref, watch } from 'vue'
 import { toast } from 'vue-sonner'
 
+const email = ref('')
 const auth_info = reactive({
 	is_signup: false,
 	is_verification_code_sent: false,
-	email: '',
 	first_name: '',
 	last_name: '',
 	account_request: '',
 	verification_code: '',
+})
+
+watch(email, () => {
+	auth_info.first_name = ''
+	auth_info.last_name = ''
+	auth_info.is_signup = false
+	auth_info.is_verification_code_sent = false
+	auth_info.verification_code = ''
 })
 
 const loginResource = createResource({
@@ -156,7 +163,7 @@ const loginResource = createResource({
 	auto: false,
 	method: 'POST',
 	makeParams: () => ({
-		email: auth_info.email,
+		email: email.value,
 	}),
 	onSuccess: (data) => {
 		auth_info.is_signup = data.account_exists == false
@@ -164,7 +171,7 @@ const loginResource = createResource({
 			auth_info.is_verification_code_sent = true
 		}
 		if (auth_info.is_signup) {
-			toast.message('Please proceed to signup')
+			toast.message('Please provide your name to continue')
 		}
 	},
 })
@@ -174,7 +181,7 @@ const registerResource = createResource({
 	auto: false,
 	method: 'POST',
 	makeParams: () => ({
-		email: auth_info.email,
+		email: email,
 		first_name: auth_info.first_name,
 		last_name: auth_info.last_name,
 	}),
@@ -190,7 +197,7 @@ const verifyCodeResource = createResource({
 	method: 'POST',
 	makeParams: () => ({
 		code: auth_info.verification_code,
-		email: auth_info.is_signup ? null : auth_info.email,
+		email: auth_info.is_signup ? null : email,
 		ar: auth_info.is_signup ? auth_info.account_request : null,
 	}),
 	onSuccess: () => {
