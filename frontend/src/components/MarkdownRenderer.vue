@@ -11,6 +11,8 @@ import MarkdownItSub from 'markdown-it-sub'
 import MarkdownItSup from 'markdown-it-sup'
 import { computed } from 'vue'
 
+import 'highlight.js/styles/github-dark.css'
+
 const props = defineProps({
 	content: {
 		type: String,
@@ -53,3 +55,8 @@ const markdownContent = computed(() => {
 	return content
 })
 </script>
+<style>
+pre {
+	padding: 0px !important;
+}
+</style>

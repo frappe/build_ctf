@@ -1,5 +1,9 @@
 <template>
-	<Dialog v-bind:modelValue="showDialog" @update:modelValue="updateShowDialog">
+	<Dialog
+		v-bind:modelValue="showDialog"
+		@update:modelValue="updateShowDialog"
+		:options="{ size: 'xl' }"
+	>
 		<template #body-title>
 			<h3>{{ stage.title }}&nbsp;&nbsp;<StageStatusBadge :status="stage_info.status" /></h3>
 		</template>
