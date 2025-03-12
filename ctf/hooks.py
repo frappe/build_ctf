@@ -247,6 +247,10 @@ export_python_type_annotations = True
 
 fixtures = ["Web Page", "CTF Stage"]
 
+persistent_cache_keys = [
+	"stage_06_verification_code*",
+]
+
 website_route_rules = [{"from_route": "/frontend/<path:app_path>", "to_route": "frontend"}]
 
 website_redirects = [
