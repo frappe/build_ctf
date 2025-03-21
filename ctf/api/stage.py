@@ -2,7 +2,7 @@ import os
 
 import frappe
 
-from ctf.utils import generate_otp
+from ctf.utils import generate_otp, render_template
 
 # This file contains only Stage Specific APIs
 
@@ -47,6 +47,19 @@ def validate_verification_code(code: str):
 	response = "Your flag is " + get_correct_flag("STAGE-06")
 	frappe.msgprint(response)
 	return response
+
+
+# Stage 09
+@frappe.whitelist()
+def retrieve_flag(template: str, answer: str):
+	return render_template(
+		template,
+		{
+			"flag": get_correct_flag("STAGE-09"),
+			"super_secret": frappe.generate_hash(length=20),
+			"answer": answer,
+		},
+	)
 
 
 # Stage 10
