@@ -45,10 +45,10 @@
   "title": "TBD1"
  },
  {
-  "description": "Example - \n\n```jinja\n{% if answer == super_secret %}\n   here is your flag: {{ flag }}\n{% else %}\n  invalid secret\n{% endif %} \n```",
+  "description": "Access the challenge here - [/stage-9](/stage-9)",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-03-22 02:25:06.010382",
+  "modified": "2025-03-22 03:12:03.321283",
   "name": "STAGE-09",
   "points": 100,
   "title": "Code Injection using Jinja"
