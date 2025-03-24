@@ -18,10 +18,10 @@
   "title": "Sticky Note"
  },
  {
-  "description": "*Memory can change the shape of a room; it can change the color of a car. And memories can be distorted. They're just an interpretation, and they're irrelevant if you have the facts and files.*",
+  "description": "*Memory can change the shape of a room; it can change the color of a car. And memories can be distorted. They're just an interpretation, and they're irrelevant if you have the facts or the files.*",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-03-24 16:56:55.119129",
+  "modified": "2025-03-24 17:00:12.337309",
   "name": "STAGE-05",
   "points": 100,
   "title": "Memento"
