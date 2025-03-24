@@ -1,9 +1,9 @@
 [
  {
-  "description": "Hello\n\nDownload the binary - [Click Here]({{BINARY_FILE_URL}})",
+  "description": "Start by downloading the file - [Click Here]({{BINARY_FILE_URL}})",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-03-07 18:15:22.906096",
+  "modified": "2025-03-24 14:14:17.592929",
   "name": "STAGE-08",
   "points": 100,
   "title": "Sleuthing"
@@ -18,19 +18,19 @@
   "title": "Password Leak"
  },
  {
-  "description": "MEMENTO, You stored this flag in a file on this server and forgot which one!",
+  "description": "You stored this flag in a file on this server and forgot which one!",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-03-07 18:20:43.284416",
+  "modified": "2025-03-24 14:38:22.556046",
   "name": "STAGE-05",
   "points": 100,
-  "title": "REST API"
+  "title": "Memento"
  },
  {
-  "description": "Access the challenge here - [/stage-06](/stage-06)",
+  "description": "Start here - [/stage-06](/stage-06)",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-03-22 02:24:12.488053",
+  "modified": "2025-03-24 14:14:45.338763",
   "name": "STAGE-06",
   "points": 100,
   "title": "Brute Forcing OTP"
@@ -45,10 +45,10 @@
   "title": "TBD1"
  },
  {
-  "description": "Access the challenge here - [/stage-9](/stage-9)",
+  "description": "Start here - [/stage-9](/stage-9)",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-03-22 03:12:03.321283",
+  "modified": "2025-03-24 14:13:57.389873",
   "name": "STAGE-09",
   "points": 100,
   "title": "Code Injection using Jinja"
@@ -63,30 +63,30 @@
   "title": "SQL Injection"
  },
  {
-  "description": "Hello\n\nTry out this url - [{{FLAG_PAGE_ROUTE}}]({{FLAG_PAGE_ROUTE}})",
+  "description": "Start here - [{{FLAG_PAGE_ROUTE}}]({{FLAG_PAGE_ROUTE}})",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-03-07 18:16:29.476418",
+  "modified": "2025-03-24 14:13:41.469843",
   "name": "STAGE-02",
   "points": 100,
   "title": "Read Client Side JS"
  },
  {
-  "description": "Hello\n\nTry out this url - [{{FLAG_PAGE_ROUTE}}]({{FLAG_PAGE_ROUTE}})",
+  "description": "Start here - [{{FLAG_PAGE_ROUTE}}]({{FLAG_PAGE_ROUTE}})",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-03-07 18:16:24.021732",
+  "modified": "2025-03-24 14:13:35.224245",
   "name": "STAGE-03",
   "points": 100,
   "title": "Unminify"
  },
  {
-  "description": "Hello\n\nTry out this url - [{{FLAG_PAGE_ROUTE}}]({{FLAG_PAGE_ROUTE}})",
+  "description": "Start here - [{{FLAG_PAGE_ROUTE}}]({{FLAG_PAGE_ROUTE}})",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-03-07 15:50:54.052444",
+  "modified": "2025-03-24 14:37:12.700176",
   "name": "STAGE-01",
   "points": 100,
-  "title": "Read API Response"
+  "title": "Read API"
  }
 ]
