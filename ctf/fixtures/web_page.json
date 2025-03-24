@@ -225,12 +225,12 @@
   "insert_style": 0,
   "javascript": "let template = `\n{% if answer == super_secret %}\n   Here is your flag: {{ flag }}\n{% else %}\n  <h4>Invalid secret</h4>\n{% endif %}\n`\n\nfunction checkFlag() {\n    const guessed_answer = document.getElementById(\"guessed_answer\").value;\n\n    fetch(\"/api/method/ctf.api.stage.retrieve_flag\", {\n        method: \"POST\",\n        headers: {\n            \"Content-Type\": \"application/json\",\n            \"Accept\": \"application/json\",\n            \"X-Frappe-CSRF-Token\": frappe.csrf_token\n        },\n        body: JSON.stringify({\n            template: template,\n            answer: guessed_answer\n        })\n    })\n    .then(response => response.json())\n    .then(data => document.getElementById(\"content\").innerHTML = data?.message??\"\")\n    .catch(error => {\n        console.error(\"Error:\", error);\n        frappe.msgprint(\"An error occurred while checking the flag.\");\n    });\n}\n",
   "main_section": null,
-  "main_section_html": "<h2>Guess The Answer</h2>\n<br>\n<input id=\"guessed_answer\"/>\n<button onclick=\"checkFlag()\">Check Flag</button>\n\n<div id=\"content\"></div>",
+  "main_section_html": "<h3>Not all gifts are what they seem</h3>\n<br>\n<input id=\"guessed_answer\"/>\n<button onclick=\"checkFlag()\">Check Flag</button>\n\n<div id=\"content\"></div>",
   "main_section_md": null,
   "meta_description": null,
   "meta_image": null,
   "meta_title": null,
-  "modified": "2025-03-22 03:10:10.867596",
+  "modified": "2025-03-24 18:16:54.489714",
   "module": null,
   "name": "stage-09",
   "page_blocks": [],
@@ -241,7 +241,7 @@
   "slideshow": null,
   "start_date": null,
   "text_align": "Center",
-  "title": "Stage 09",
+  "title": "Trojan Horse",
   "website_sidebar": null
  }
 ]
