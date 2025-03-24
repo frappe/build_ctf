@@ -55,7 +55,7 @@ int main() {
     printf("Enter passcode to view the flag: ");
     scanf("%99s", input);
 
-    const char *flag = "FLAG{FLAG_CHARACTERS}";
+    const char *flag = "__SYNT{FLAG_CHARACTERS}";
     asm volatile("" : : "r"(flag));  // Prevents compiler optimization
 
     if (0) { // <-- bug

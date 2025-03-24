@@ -2,6 +2,7 @@
 # For license information, please see license.txt
 
 from __future__ import annotations
+import codecs
 
 import contextlib
 import json
@@ -159,6 +160,7 @@ def setup_stage_07(candidate: CTFCandidate, flag: str) -> dict[str, str]:
 
 def setup_stage_08(candidate: CTFCandidate, flag: str) -> dict[str, str]:
 	flag_characters = flag.replace("FLAG{", "").replace("}", "")
+	flag_characters = codecs.encode(flag_characters, "rot13")
 	tmp_source_file_name = "/tmp/stage-08-" + frappe.generate_hash(length=30) + ".c"
 	with open(tmp_source_file_name, "w") as f:
 		f.write(get_stage_08_c_source().replace("FLAG_CHARACTERS", flag_characters))

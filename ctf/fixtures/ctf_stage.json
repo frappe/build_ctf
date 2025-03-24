@@ -1,12 +1,12 @@
 [
  {
-  "description": "Start by downloading the file - [Click Here]({{BINARY_FILE_URL}})",
+  "description": "Start by downloading this binary - [Click Here]({{BINARY_FILE_URL}})",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-03-24 14:14:17.592929",
+  "modified": "2025-03-24 19:13:13.585514",
   "name": "STAGE-08",
   "points": 100,
-  "title": "Sleuthing"
+  "title": "Rome"
  },
  {
   "description": "Start here - [/stage-04](/stage-04)\n\n",
