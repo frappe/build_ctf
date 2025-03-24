@@ -67,3 +67,10 @@ def has_file_permission(doc, ptype, user):
 	if ptype != "read":
 		return False
 	return doc.owner == user
+
+
+
+def user_query(*args, **kwargs):
+	if frappe.session.data.user_type == "System User":
+		return
+	return f" name = '{frappe.session.user}'"

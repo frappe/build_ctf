@@ -120,9 +120,9 @@ app_license = "apache-2.0"
 # -----------
 # Permissions evaluated in scripted ways
 
-# permission_query_conditions = {
-# 	"File": "ctf.ctf.doctype.ctf_candidate.ctf_candidate.get_permission_query_conditions",
-# }
+permission_query_conditions = {
+	"User": "ctf.ctf.doctype.ctf_candidate.ctf_candidate.user_query",
+}
 
 has_permission = {
 	"File": "ctf.ctf.doctype.ctf_candidate.ctf_candidate.has_file_permission",
