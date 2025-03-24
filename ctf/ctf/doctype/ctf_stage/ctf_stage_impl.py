@@ -46,7 +46,7 @@ def setup_stage_01(candidate: CTFCandidate, flag: str) -> dict[str, str]:
 			"allow_guest": 1,
 			"script": f"""
 print("{flag}")
-frappe.response['message'] = "Hi, you got close to your flag"
+frappe.response['message'] = "You are on the right path, but a crucial detail escapes you - examine again, and you may yet arrive at the truth."
 """,
 		}
 	).insert()

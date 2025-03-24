@@ -84,9 +84,9 @@
   "description": "Start here - [{{FLAG_PAGE_ROUTE}}]({{FLAG_PAGE_ROUTE}})",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-03-24 14:37:12.700176",
+  "modified": "2025-03-24 14:59:27.224857",
   "name": "STAGE-01",
   "points": 100,
-  "title": "Read API"
+  "title": "Sherlock"
  }
 ]
