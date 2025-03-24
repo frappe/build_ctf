@@ -1,4 +1,5 @@
 import os
+import json
 
 import frappe
 
@@ -13,13 +14,16 @@ def is_correct_flag(submitted_flag: str):
 	try:
 		correct_flag = get_correct_flag("STAGE-04")
 		if submitted_flag != correct_flag:
-			return 1 / 0
+			frappe.throw("Invalid flag")
 		else:
 			return "Your flag is " + correct_flag
-	except:  # noqa: E722
-		frappe.local.response["http_status_code"] = 500
-		frappe.local.response["is_error"] = True
-		return frappe.get_traceback(with_context=True)
+	except Exception as e:  # noqa: E722
+		# Website users can't see exc by default
+		frappe.local.response["http_status_code"] = 417
+		tb =  frappe.get_traceback(with_context=True)
+		frappe.response["exc"] = json.dumps([tb,])
+		frappe.response.exception = tb.splitlines()[-1]
+		frappe.response["exc_type"] = e.__name__
 
 
 # Stage 06
