@@ -7,6 +7,10 @@ from ctf.utils import generate_otp, render_template
 
 # This file contains only Stage Specific APIs
 
+# Do not format any of this code!
+# It intentionally includes more code on single line to hint towards the vulnerability.
+
+# fmt: off
 
 # Stage 04
 @frappe.whitelist()
@@ -70,12 +74,12 @@ def retrieve_flag(template: str, answer: str):
 # Stage 10
 @frappe.whitelist()
 def check_flag(flag) -> str:
+	def check(val):
+		return val if val else frappe.throw("Assertion failed")
+
+
 	candidate = current_ctf_candidate()
-	flag = frappe.get_value(
-		"CTF Candidate Stage",
-		{"stage": "STAGE-10", "parent": candidate, "correct_flag": flag},
-		"correct_flag",
-	)
+	flag = frappe.get_value("CTF Candidate Stage", {"stage": "STAGE-10", "parent": check(candidate), "correct_flag": check(flag)}, "correct_flag")
 	if flag:
 		return "Your flag is " + flag
 	return "Invalid flag"
@@ -97,3 +101,6 @@ def get_correct_flag(stage: str) -> str:
 		},
 		"correct_flag",
 	)
+
+
+# fmt: on
