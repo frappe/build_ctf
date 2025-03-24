@@ -9,13 +9,13 @@
   "title": "Sleuthing"
  },
  {
-  "description": "Access the challenge here - [/stage-04](/stage-04)\n\nClue in code -\n```python\ndef is_correct_flag(submitted_flag: str):\n\ttry:\n\t\tcorrect_flag = get_correct_flag(\"STAGE-04\")\n\t\tif submitted_flag != correct_flag:\n\t\t\treturn 1 / 0\n\t\telse:\n\t\t\treturn \"Your flag is \" + correct_flag\n\texcept:\n\t\tfrappe.local.response[\"http_status_code\"] = 500\n\t\tfrappe.local.response[\"is_error\"] = True\n\t\treturn frappe.get_traceback(with_context=True)\n```",
+  "description": "Start here - [/stage-04](/stage-04)\n\n",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-03-07 18:19:48.835785",
+  "modified": "2025-03-24 16:12:41.486256",
   "name": "STAGE-04",
   "points": 100,
-  "title": "Password Leak"
+  "title": "Sticky Note"
  },
  {
   "description": "You stored this flag in a file on this server and forgot which one!",
@@ -75,10 +75,10 @@
   "description": "Start here - [{{FLAG_PAGE_ROUTE}}]({{FLAG_PAGE_ROUTE}})",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-03-24 14:13:35.224245",
+  "modified": "2025-03-24 15:53:46.704621",
   "name": "STAGE-03",
   "points": 100,
-  "title": "Unminify"
+  "title": "Haystack"
  },
  {
   "description": "Start here - [{{FLAG_PAGE_ROUTE}}]({{FLAG_PAGE_ROUTE}})",
