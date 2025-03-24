@@ -29,8 +29,8 @@ def is_correct_flag(submitted_flag: str):
 # Stage 06
 @frappe.whitelist()
 def send_verification_code(email: str):
-	if email != "administrator@ctfsite.com":
-		frappe.throw("Invalid email address. Only administrator@ctfsite.com is allowed")
+	if email != "administrator@frappe.io":
+		frappe.throw("Invalid email address. Only administrator@frappe.io is allowed")
 	otp_key = "stage_06_verification_code||" + frappe.session.user
 	otp = str(int.from_bytes(os.urandom(6), byteorder="big") % 9000 + 1000)
 	frappe.cache().set_value(otp_key, otp, expires_in_sec=1200)
