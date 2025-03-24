@@ -140,7 +140,7 @@ def setup_stage_05(candidate: CTFCandidate, flag: str) -> dict[str, str]:
 			{
 				"doctype": "File",
 				"file_name": "memento.txt",
-				"content": f"Your got the flag {flag}",
+				"content": f"Remember this: {flag}",
 				"is_private": 1,
 			}
 		).insert(ignore_permissions=True)
