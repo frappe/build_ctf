@@ -30,10 +30,10 @@
   "description": "Start here - [/stage-06](/stage-06)",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-03-24 14:14:45.338763",
+  "modified": "2025-03-24 17:55:40.927118",
   "name": "STAGE-06",
   "points": 100,
-  "title": "Brute Forcing OTP"
+  "title": "Rainbow"
  },
  {
   "description": ".",

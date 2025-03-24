@@ -120,12 +120,12 @@
   "insert_style": 0,
   "javascript": "function sendCode(){\n    frappe.call({\n        \"method\": \"ctf.api.stage.send_verification_code\", \n        \"args\": {\"email\": document.getElementById(\"email\").value},\n        \"freeze\": true,\n        \"freeze_message\": \"Sending Code ..\",\n    })\n}\n\nfunction validateCode() {\n    frappe.call({\n        \"method\": \"ctf.api.stage.validate_verification_code\", \n        \"args\": {\"code\": document.getElementById(\"code\").value,\n        \"freeze\": true,\n        \"freeze_message\": \"Validating Code ..\",\n        }\n    })\n}",
   "main_section": null,
-  "main_section_html": "<p>Email - </p>\n<input id=\"email\" value=\"administrator@ctfsite.com\" disabled/>\n<button onclick=\"sendCode()\">Send Code</button>\n<br><br>\n<p>Verification Code - </p>\n<input id=\"code\"/>\n<button onclick=\"validateCode()\">Validate and Get Flag</button>",
+  "main_section_html": "<h3> Authenticate </h3>\n<br><br>\n<input id=\"email\" value=\"administrator@frappe.io\" disabled/>\n<button onclick=\"sendCode()\">Send Code</button>\n<br><br>\n<p>Verification Code </p>\n<input type=\"number\" id=\"code\" placeholder=\"----\" min=\"1000\" max=\"9999\"/>\n<button onclick=\"validateCode()\">Validate and Get Flag</button>\n<br><br><br><br>\n\n<blockquote><em>\"To err is human, to automate divine.\"</em></blockquote>\n",
   "main_section_md": null,
   "meta_description": null,
   "meta_image": null,
   "meta_title": null,
-  "modified": "2025-02-22 15:05:30.423187",
+  "modified": "2025-03-24 17:55:52.593800",
   "module": null,
   "name": "stage-06",
   "page_blocks": [],
@@ -136,7 +136,7 @@
   "slideshow": null,
   "start_date": null,
   "text_align": "Center",
-  "title": "Stage 06",
+  "title": "Rainbow",
   "website_sidebar": null
  },
  {
