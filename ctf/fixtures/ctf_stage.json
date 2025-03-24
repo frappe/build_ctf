@@ -66,10 +66,10 @@
   "description": "Start here - [{{FLAG_PAGE_ROUTE}}]({{FLAG_PAGE_ROUTE}})",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-03-24 14:13:41.469843",
+  "modified": "2025-03-24 14:59:48.346539",
   "name": "STAGE-02",
   "points": 100,
-  "title": "Read Client Side JS"
+  "title": "Abyss"
  },
  {
   "description": "Start here - [{{FLAG_PAGE_ROUTE}}]({{FLAG_PAGE_ROUTE}})",
