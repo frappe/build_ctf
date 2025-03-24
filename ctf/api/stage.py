@@ -41,8 +41,9 @@ def send_verification_code(email: str):
 
 @frappe.whitelist()
 def validate_verification_code(code: str):
+	code = str(code)
 	otp_key = "stage_06_verification_code||" + frappe.session.user
-	if not code and len(code) != 4:
+	if len(code) != 4:
 		frappe.throw("Verification code should be 4 digits")
 		return
 	if code != frappe.cache().get_value(otp_key, expires=True):
