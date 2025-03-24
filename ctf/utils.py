@@ -19,6 +19,9 @@ def render_template(template: str, context=None):
 		context = {}
 	jenv = get_jenv()
 	template = jenv.from_string(template)
+	template.globals = {}
+	jenv.globals = {}
+	jenv.filters = {}
 	try:
 		return template.render(**context)
 	except Exception as e:
@@ -34,7 +37,7 @@ def get_jenv():
 
 @site_cache(ttl=10 * 60, maxsize=4)
 def _get_jenv():
-	from frappe.utils.safe_exec import UNSAFE_ATTRIBUTES, get_safe_globals
+	from frappe.utils.safe_exec import UNSAFE_ATTRIBUTES
 	from jinja2 import DebugUndefined
 	from jinja2.sandbox import SandboxedEnvironment
 
