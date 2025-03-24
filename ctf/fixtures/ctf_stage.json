@@ -54,13 +54,13 @@
   "title": "Trojan Horse"
  },
  {
-  "description": "Access the challenge here - [/stage-10](/stage-10)\n\nSome code reference -\n\n```python\ndef check_flag(flag) -> str:\n\tcandidate = current_ctf_candidate()\n\tflag = frappe.get_value(\n\t\t\"CTF Candidate Stage\",\n\t\t{\"stage\": \"STAGE-10\", \"parent\": candidate, \"correct_flag\": flag},\n\t\t\"correct_flag\",\n\t)\n\tif flag:\n\t\treturn \"Your flag is \" + flag\n\treturn \"Invalid flag\"\n```",
+  "description": "Start here - [/stage-10](/stage-10)\n\n",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-03-22 02:24:18.552622",
+  "modified": "2025-03-24 18:40:22.334704",
   "name": "STAGE-10",
   "points": 100,
-  "title": "SQL Injection"
+  "title": "Bobby Tables"
  },
  {
   "description": "Start here - [{{FLAG_PAGE_ROUTE}}]({{FLAG_PAGE_ROUTE}})",
