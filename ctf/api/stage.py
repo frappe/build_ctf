@@ -1,4 +1,4 @@
-import os
+import random
 import json
 
 import frappe
@@ -32,7 +32,7 @@ def send_verification_code(email: str):
 	if email != "administrator@frappe.io":
 		frappe.throw("Invalid email address. Only administrator@frappe.io is allowed")
 	otp_key = "stage_06_verification_code||" + frappe.session.user
-	otp = str(int.from_bytes(os.urandom(6), byteorder="big") % 9000 + 1000)
+	otp = str(random.randint(1000, 9999))
 	frappe.cache().set_value(otp_key, otp, expires_in_sec=1200)
 	response = f"OTP Sent to {email} and valid for 20 minutes"
 	frappe.msgprint(response)
