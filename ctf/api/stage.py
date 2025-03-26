@@ -93,7 +93,7 @@ def retrieve_flag(template: str, answer: str):
 @frappe.whitelist()
 def check_flag(flag) -> str:
 	def check(val):
-		return val if val and val.lower() != "sudo" else frappe.throw("Assertion failed")
+		return val if val and val != "sudo" else frappe.throw("Assertion failed")
 
 
 	candidate = current_ctf_candidate()
