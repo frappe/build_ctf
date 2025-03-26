@@ -38,9 +38,9 @@ def send_verification_code(email: str):
 	if email != "administrator@frappe.io":
 		frappe.throw("Invalid email address. Only administrator@frappe.io is allowed")
 	otp_key = "stage_06_verification_code||" + frappe.session.user
-	otp = str(random.randint(1000, 9999))
+	otp = str(random.randint(100, 999))
 	frappe.cache().set_value(otp_key, otp, expires_in_sec=1200)
-	response = f"OTP Sent to {email} and valid for 20 minutes"
+	response = f"OTP Sent to {email} and it is valid for 20 minutes"
 	frappe.msgprint(response)
 	return response
 
@@ -49,12 +49,11 @@ def send_verification_code(email: str):
 def validate_verification_code(code: str):
 	code = str(code)
 	otp_key = "stage_06_verification_code||" + frappe.session.user
-	if len(code) != 4:
-		frappe.throw("Verification code should be 4 digits")
+	if len(code) != 3:
+		frappe.throw("Verification code should be 3 digits")
 		return
-	if code != frappe.cache().get_value(otp_key, expires=True):
+	if code != frappe.cache().get_value(otp_key):
 		frappe.throw("Invalid verification code")
-		return
 	response = "Your flag is " + get_correct_flag("STAGE-06")
 	frappe.msgprint(response)
 	return response
@@ -64,8 +63,8 @@ def the_button_pressed():
 	msg = f"User {frappe.session.user} pressed the button."
 	frappe.publish_realtime("button_press", msg, user=frappe.session.user)
 
-	frappe.db.sql("update `tabStat Counter` set count = count + 1 where name = 'button_presses'")
 	if random.random() < 0.1:
+		frappe.db.sql("update `tabStat Counter` set count = count + 10 where name = 'button_presses'")
 		frappe.get_cached_doc("Stat Counter", "button_presses").clear_cache()
 
 	return "What are you expecting to find here?"
@@ -108,7 +107,7 @@ def check_flag(flag) -> str:
 def current_ctf_candidate() -> str:
 	if frappe.session.user == "Guest":
 		frappe.throw("You are not logged in")
-	return frappe.get_cached_value("CTF Candidate", {"user": frappe.session.user}, "name")
+	return frappe.db.get_value("CTF Candidate", {"user": frappe.session.user}, "name")
 
 
 def get_correct_flag(stage: str) -> str:
