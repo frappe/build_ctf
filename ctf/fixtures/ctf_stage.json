@@ -3,9 +3,9 @@
   "description": "Start by downloading this binary - [Click Here]({{BINARY_FILE_URL}})",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-03-24 19:13:13.585514",
+  "modified": "2025-03-26 17:57:16.438112",
   "name": "STAGE-08",
-  "points": 100,
+  "points": 200,
   "title": "Rome"
  },
  {
@@ -21,46 +21,46 @@
   "description": "*Memory can change the shape of a room; it can change the color of a car. And memories can be distorted. They're just an interpretation, and they're irrelevant if you have the facts or the files.*",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-03-24 17:00:12.337309",
+  "modified": "2025-03-26 17:56:08.089137",
   "name": "STAGE-05",
-  "points": 100,
+  "points": 200,
   "title": "Memento"
  },
  {
   "description": "Start here - [/stage-06](/stage-06)",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-03-24 17:55:40.927118",
+  "modified": "2025-03-26 17:56:26.003074",
   "name": "STAGE-06",
-  "points": 100,
+  "points": 200,
   "title": "Rainbow"
  },
  {
   "description": "Start here - [/stage-07](/stage-07)",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-03-26 11:55:44.464594",
+  "modified": "2025-03-26 17:56:33.814860",
   "name": "STAGE-07",
-  "points": 100,
+  "points": 200,
   "title": "SIGINT"
- },
- {
-  "description": "Start here - [/stage-09](/stage-09)",
-  "docstatus": 0,
-  "doctype": "CTF Stage",
-  "modified": "2025-03-24 18:02:06.359574",
-  "name": "STAGE-09",
-  "points": 100,
-  "title": "Trojan Horse"
  },
  {
   "description": "Start here - [/stage-10](/stage-10)\n\n",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-03-24 18:40:22.334704",
+  "modified": "2025-03-26 17:56:48.719897",
   "name": "STAGE-10",
-  "points": 100,
+  "points": 300,
   "title": "Bobby Tables"
+ },
+ {
+  "description": "Start here - [/stage-09](/stage-09)",
+  "docstatus": 0,
+  "doctype": "CTF Stage",
+  "modified": "2025-03-26 17:56:41.959890",
+  "name": "STAGE-09",
+  "points": 200,
+  "title": "Trojan Horse"
  },
  {
   "description": "Start here - [{{FLAG_PAGE_ROUTE}}]({{FLAG_PAGE_ROUTE}})",
@@ -75,18 +75,18 @@
   "description": "Start here - [{{FLAG_PAGE_ROUTE}}]({{FLAG_PAGE_ROUTE}})",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-03-24 15:53:46.704621",
-  "name": "STAGE-03",
+  "modified": "2025-03-24 14:59:27.224857",
+  "name": "STAGE-01",
   "points": 100,
-  "title": "Haystack"
+  "title": "Sherlock"
  },
  {
   "description": "Start here - [{{FLAG_PAGE_ROUTE}}]({{FLAG_PAGE_ROUTE}})",
   "docstatus": 0,
   "doctype": "CTF Stage",
-  "modified": "2025-03-24 14:59:27.224857",
-  "name": "STAGE-01",
+  "modified": "2025-03-24 15:53:46.704621",
+  "name": "STAGE-03",
   "points": 100,
-  "title": "Sherlock"
+  "title": "Haystack"
  }
 ]
