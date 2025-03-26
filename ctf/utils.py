@@ -68,7 +68,7 @@ def apply_global_rate_limit():
 
 
 
-@rate_limit(key="_user", ip_based=False, limit=1500, seconds=60)
+@rate_limit(key="_user", ip_based=False, limit=300, seconds=60)
 def limiter(_user: str):
 	# This function doesn't need to do anything.
 	pass
