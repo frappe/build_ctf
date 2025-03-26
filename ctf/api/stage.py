@@ -2,6 +2,8 @@ import random
 import json
 
 import frappe
+from frappe.utils import sbool
+import random
 
 from ctf.utils import generate_otp, render_template
 
@@ -56,6 +58,23 @@ def validate_verification_code(code: str):
 	response = "Your flag is " + get_correct_flag("STAGE-06")
 	frappe.msgprint(response)
 	return response
+
+@frappe.whitelist()
+def the_button_pressed():
+	msg = f"User {frappe.session.user} pressed the button."
+	frappe.publish_realtime("button_press", msg, user=frappe.session.user)
+
+	frappe.db.sql("update `tabStat Counter` set count = count + 1 where name = 'button_presses'")
+	if random.random() < 0.1:
+		frappe.get_cached_doc("Stat Counter", "button_presses").clear_cache()
+
+	return "What are you expecting to find here?"
+
+@frappe.whitelist()
+def the_button_not_pressed():
+	msg = f"User {frappe.session.user} did not press the button: " + get_correct_flag("STAGE-07")
+	frappe.publish_realtime("button_press", msg, user=frappe.session.user)
+	return "What are you expecting to find here?"
 
 
 # Stage 09
