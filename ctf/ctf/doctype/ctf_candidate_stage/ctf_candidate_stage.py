@@ -26,7 +26,19 @@ class CTFCandidateStage(Document):
 	# end: auto-generated types
 
 	def submit_flag(self, flag: str):
+		if self.correct:
+			return
+
 		self.submitted_flag = flag.strip()
 		self.correct = self.correct_flag == flag
-		self.points = frappe.get_value("CTF Stage", self.stage, "points") if self.correct else 0
+		points = 0
+		if self.correct:
+			points = frappe.db.get_value("CTF Stage", self.stage, "points")
+			# First one to solve gets 100, 2nd one gets 99 and so on until 50.
+			# Then everyone gets 50.
+			rank = frappe.db.get_value(self.doctype, {"stage": self.stage, "correct": 1}, "count(*)", for_update=True) or 0
+			rank = min(rank, 50)
+			points -= rank
+
+		self.points = points
 		self.save(ignore_permissions=True)

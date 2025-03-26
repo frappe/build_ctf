@@ -38,7 +38,7 @@
 						{{
 							stage_info.correct
 								? '🎉 You got the flag!'
-								: 'Submitted flag is wrong. Retry !'
+								: 'Submitted flag is wrong. Retry!'
 						}}
 					</div>
 				</div>
