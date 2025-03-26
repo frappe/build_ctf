@@ -245,7 +245,7 @@ export_python_type_annotations = True
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
-fixtures = ["Web Page", "CTF Stage"]
+fixtures = ["Web Page", "CTF Stage", "Stat Counter"]
 
 persistent_cache_keys = [
 	"stage_06_verification_code*",
