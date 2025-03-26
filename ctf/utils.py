@@ -1,6 +1,7 @@
 import os
 
 import frappe
+from frappe.rate_limiter import rate_limit
 from frappe.utils.caching import site_cache
 
 
@@ -51,3 +52,23 @@ def _get_jenv():
 			return super().is_safe_attribute(obj, attr, *args, **kwargs)
 
 	return FrappeSandboxedEnvironment(undefined=DebugUndefined)
+
+
+def apply_global_rate_limit():
+	"""Apply a global rate limit of ~1000 req/minute.
+
+	This is just added to
+	- avoid DDOS
+	- slow down OTP cracking stage (which requires enumerating ~9000 values)
+	"""
+	frappe.form_dict._user = frappe.session.user
+	limiter(frappe.session.user)
+	frappe.form_dict.pop("_user", None)
+
+
+
+
+@rate_limit(key="_user", ip_based=False, limit=1500, seconds=60)
+def limiter(_user: str):
+	# This function doesn't need to do anything.
+	pass

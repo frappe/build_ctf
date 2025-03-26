@@ -199,7 +199,7 @@ has_permission = {
 
 # Request Events
 # ----------------
-# before_request = ["ctf.utils.before_request"]
+before_request = ["ctf.utils.apply_global_rate_limit"]
 # after_request = ["ctf.utils.after_request"]
 
 # Job Events
