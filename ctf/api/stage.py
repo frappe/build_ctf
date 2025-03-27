@@ -29,7 +29,7 @@ def is_correct_flag(submitted_flag: str):
 		tb =  frappe.get_traceback(with_context=True)
 		frappe.response["exc"] = json.dumps([tb,])
 		frappe.response.exception = tb.splitlines()[-1]
-		frappe.response["exc_type"] = e.__name__
+		frappe.response["exc_type"] = str(e)
 
 
 # Stage 06
