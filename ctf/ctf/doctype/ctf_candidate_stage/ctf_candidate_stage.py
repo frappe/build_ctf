@@ -38,7 +38,7 @@ class CTFCandidateStage(Document):
 			# Then everyone gets 50.
 			rank = frappe.db.get_value(self.doctype, {"stage": self.stage, "correct": 1}, "count(*)", for_update=True) or 0
 			rank = min(rank, 50)
-			points -= rank
+			points = round(points * (1.0 - rank/100))
 
 		self.points = points
 		self.save(ignore_permissions=True)
