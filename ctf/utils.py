@@ -61,11 +61,11 @@ def apply_global_rate_limit():
 	- avoid DDOS
 	- slow down OTP cracking stage (which requires enumerating ~9000 values)
 	"""
+	if frappe.session.user == "Guest":
+		return
 	frappe.form_dict._user = frappe.session.user
 	limiter(frappe.session.user)
 	frappe.form_dict.pop("_user", None)
-
-
 
 
 @rate_limit(key="_user", ip_based=False, limit=300, seconds=60)

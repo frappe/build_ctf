@@ -1,11 +1,9 @@
-import random
 import json
+import random
 
 import frappe
-from frappe.utils import sbool
-import random
 
-from ctf.utils import generate_otp, render_template
+from ctf.utils import render_template
 
 # This file contains only Stage Specific APIs
 
