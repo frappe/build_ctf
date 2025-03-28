@@ -20,7 +20,12 @@ def status():
 		data["logged_in"] = True
 		data["full_name"] = frappe.get_value("User", frappe.session.user, "full_name")
 		data["setup_completed"] = is_setup_completed()
-		data["total_points"] = frappe.db.get_value("CTF Candidate Stage", {"parent": current_ctf_candidate(), "correct": 1}, "sum(points)") or 0
+		data["total_points"] = (
+			frappe.db.get_value(
+				"CTF Candidate Stage", {"parent": current_ctf_candidate(), "correct": 1}, "sum(points)"
+			)
+			or 0
+		)
 	return data
 
 
@@ -35,6 +40,7 @@ def stages():
 
 You will find a unique link somewhere in the page to register to this contest.
 """,
+				"max_points": "0",
 				"points": "0",
 				"variables": {},
 				"submitted": False,
