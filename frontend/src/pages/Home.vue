@@ -2,9 +2,18 @@
 	<div class="p-5 w-screen">
 		<div class="w-full flex flex-row justify-between items-center pb-5">
 			<div>👋 Hi, {{ statusResource?.data?.full_name }}</div>
-			<Button iconLeft="log-out" @click="logout" v-if="statusResource.data.logged_in"
-				>Logout</Button
-			>
+			<div v-if="statusResource.data.logged_in" class="flex flex-row gap-2 items-center">
+				<p class="text-ink-gray-8 text-base h-min">
+					Points -
+					<span class="text-ink-gray-9 font-semibold">{{
+						statusResource?.data?.total_points
+					}}</span>
+				</p>
+				<a href="/leaderboard" target="_blank">
+					<Button :iconLeft="ChartNoAxesColumn">Leaderboard</Button>
+				</a>
+				<Button iconLeft="log-out" @click="logout">Logout</Button>
+			</div>
 		</div>
 		<div
 			class="h-[80vh] min-w-full flex justify-center items-center"
@@ -30,6 +39,10 @@
 					label: 'Points',
 					key: 'points',
 					width: '80px',
+					align: 'center',
+					getLabel: ({ row }) => {
+						return `${row.points} / ${row.max_points}`
+					},
 				},
 				{
 					label: 'Status',
@@ -67,7 +80,12 @@
 			:stage="selectedStage"
 			:showDialog="showStageDialog"
 			@update:showDialog="(e) => (showStageDialog = e)"
-			:refreshStageList="() => stagesResource.reload()"
+			:refreshStageList="
+				() => {
+					stagesResource.reload()
+					statusResource.reload()
+				}
+			"
 		/>
 	</div>
 </template>
@@ -77,6 +95,7 @@ import { ListView, createResource, Spinner } from 'frappe-ui'
 import { computed, h, onMounted, ref } from 'vue'
 import StageDialog from '../components/StageDialog.vue'
 import StageStatusBadge from '../components/StageStatusBadge.vue'
+import ChartNoAxesColumn from '../assets/ChartNoAxesColumn.vue'
 
 const showStageDialog = ref(false)
 const selectedStage = ref({})

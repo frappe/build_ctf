@@ -14,11 +14,13 @@ def status():
 		"logged_in": False,
 		"full_name": "Anonymous",
 		"setup_completed": True,  # to show the dummy stage-0
+		"total_points": 0,
 	}
 	if frappe.session.user != "Guest":
 		data["logged_in"] = True
 		data["full_name"] = frappe.get_value("User", frappe.session.user, "full_name")
 		data["setup_completed"] = is_setup_completed()
+		data["total_points"] = frappe.db.get_value("CTF Candidate Stage", {"parent": current_ctf_candidate(), "correct": 1}, "sum(points)") or 0
 	return data
 
 
@@ -65,7 +67,7 @@ You will find a unique link somewhere in the page to register to this contest.
 	stages = frappe.get_all("CTF Stage", fields=["title", "description", "points", "name"], order_by="name")
 	candidate_stages = frappe.get_all(
 		"CTF Candidate Stage",
-		fields=["stage", "variables", "submitted_flag", "correct"],
+		fields=["stage", "variables", "submitted_flag", "correct", "points"],
 		filters={"parent": current_ctf_candidate()},
 	)
 	for stage in stages:
@@ -77,7 +79,8 @@ You will find a unique link somewhere in the page to register to this contest.
 		if not candidate_stage:
 			frappe.throw("Something is wrong. Please contact CTF admin.")
 
-		stage["points"] = str(stage["points"])  # TODO: fix it front end
+		stage["max_points"] = str(stage["points"])  # TODO: fix it front end
+		stage["points"] = str(candidate_stage.points)
 		stage["submitted_flag"] = candidate_stage.submitted_flag
 		stage["submitted"] = bool(candidate_stage.submitted_flag and len(candidate_stage.submitted_flag) > 0)
 		stage["correct"] = bool(candidate_stage.correct)
