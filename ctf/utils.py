@@ -68,7 +68,7 @@ def apply_global_rate_limit():
 	frappe.form_dict.pop("_user", None)
 
 
-@rate_limit(key="_user", ip_based=False, limit=300, seconds=60)
+@rate_limit(key="_user", ip_based=False, limit=600, seconds=60)
 def limiter(_user: str):
 	# This function doesn't need to do anything.
 	pass
