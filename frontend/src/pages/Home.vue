@@ -38,7 +38,7 @@
 				{
 					label: 'Points',
 					key: 'points',
-					width: '80px',
+					width: '100px',
 					align: 'center',
 					getLabel: ({ row }) => {
 						return `${row.points} / ${row.max_points}`
