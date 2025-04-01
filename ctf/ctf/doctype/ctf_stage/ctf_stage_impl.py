@@ -2,21 +2,17 @@
 # For license information, please see license.txt
 
 from __future__ import annotations
-import codecs
 
+import codecs
 import contextlib
-import json
 import os
 import subprocess
-import tempfile
 from typing import TYPE_CHECKING
 
 import frappe
 
 from ctf.ctf.doctype.ctf_stage.ctf_stage_assets import (
 	get_stage_02_js,
-	get_stage_03_js,
-	get_stage_03_js_map,
 	get_stage_03_js_minified,
 	get_stage_08_c_source,
 )
