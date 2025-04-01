@@ -82,46 +82,21 @@ def setup_stage_03(candidate: CTFCandidate, flag: str) -> dict[str, str]:
 		frappe.set_user(candidate.user)
 		flag_characters = flag.replace("FLAG{", "").replace("}", "")
 		hash = frappe.generate_hash(length=10)
-		base_url = frappe.utils.get_url()
 		base_file_name = f"stage-03-{candidate.name}-{hash}"
-		js_file_name = f"{base_file_name}.js"
 		min_js_file_name = f"{base_file_name}.min.js"
-		map_file_name = f"{base_file_name}.map"
 		min_js_content = get_stage_03_js_minified()
-		js_content = get_stage_03_js()
 
 		frappe.set_user(candidate.user)
 
 		frappe.get_doc(
 			{
 				"doctype": "File",
-				"file_name": js_file_name,
-				"content": js_content.replace("FLAG_CHARACTERS", flag_characters),
-				"is_private": 1,
-			}
-		).insert(ignore_permissions=True)
-
-		frappe.get_doc(
-			{
-				"doctype": "File",
 				"file_name": min_js_file_name,
-				"content": min_js_content.replace("FLAG_CHARACTERS}}", flag_characters)
-				+ f"\n//# sourceMappingURL={base_url}/private/files/{map_file_name}",
+				"content": min_js_content.replace("FLAG_CHARACTERS", flag_characters),
 				"is_private": 1,
 			}
 		).insert(ignore_permissions=True)
 
-		js_file_map = get_stage_03_js_map()
-		js_file_map["file"] = f"{base_url}/private/files/{min_js_file_name}"
-		js_file_map["sources"] = [f"{base_url}/private/files/{js_file_name}"]
-		frappe.get_doc(
-			{
-				"doctype": "File",
-				"file_name": map_file_name,
-				"content": json.dumps(js_file_map),
-				"is_private": 1,
-			}
-		).insert(ignore_permissions=True)
 		return {
 			"FLAG_PAGE_ROUTE": f"/stage-03/{base_file_name}",
 		}

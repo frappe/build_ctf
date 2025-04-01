@@ -31,16 +31,6 @@ window.getFlag = getFlag;
 """
 
 
-def get_stage_03_js() -> str:
-	with open(os.path.join(frappe.get_app_path("ctf"), "stage_assets", "stage_03.js")) as f:
-		return f.read()
-
-
-def get_stage_03_js_map() -> str:
-	with open(os.path.join(frappe.get_app_path("ctf"), "stage_assets", "stage_03.map")) as f:
-		return json.loads(f.read())
-
-
 def get_stage_03_js_minified() -> str:
 	with open(os.path.join(frappe.get_app_path("ctf"), "stage_assets", "stage_03.min.js")) as f:
 		return f.read()
