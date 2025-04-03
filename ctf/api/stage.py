@@ -51,7 +51,7 @@ def validate_verification_code(code: str):
 		frappe.throw("Verification code should be 3 digits")
 		return
 	if code != frappe.cache().get_value(otp_key):
-		frappe.throw("Invalid verification code")
+		frappe.throw("Invalid or expired verification code")
 	response = "Your flag is " + get_correct_flag("STAGE-06")
 	frappe.msgprint(response)
 	return response
